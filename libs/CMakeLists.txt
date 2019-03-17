@@ -1,0 +1,1 @@
+ADD_LIBRARY( glad STATIC ./glad/src/glad.c )
