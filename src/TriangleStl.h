@@ -1,6 +1,4 @@
-#ifndef STL_VIEWER_TRIANGLESTL_H
-#define STL_VIEWER_TRIANGLESTL_H
-
+#pragma once
 
 class TriangleStl {
 private:
@@ -14,7 +12,7 @@ public:
     TriangleStl(float* dir, float* one, float* Two, float* tree);
     ~TriangleStl();
 
-    //TODO Consider returning copy of array to separate
+    //TODO Consider returning copy of array to encapsulate
     float *getDirection() const;
 
     float *getVertexOne() const;
@@ -23,6 +21,3 @@ public:
 
     float *getVertexTree() const;
 };
-
-
-#endif //STL_VIEWER_TRIANGLESTL_H
