@@ -1,39 +1,29 @@
 #include <memory>
 #include "TriangleStl.h"
 
-#define NUMBER_OF_COORDINATES 3
-
-TriangleStl::TriangleStl(float* dir, float* one, float* Two, float* tree) {
-
-     direction = new float[NUMBER_OF_COORDINATES];
-     vertexOne = new float[NUMBER_OF_COORDINATES];
-     vertexTwo = new float[NUMBER_OF_COORDINATES];
-     vertexTree = new float[NUMBER_OF_COORDINATES];
-    memcpy(direction, dir, NUMBER_OF_COORDINATES * sizeof(float));
-    memcpy(vertexOne, one, NUMBER_OF_COORDINATES * sizeof(float));
-    memcpy(vertexTwo, Two, NUMBER_OF_COORDINATES * sizeof(float));
-    memcpy(vertexTree, tree, NUMBER_OF_COORDINATES * sizeof(float));
+//all pointers need to point to a 3 element array
+TriangleStl::TriangleStl(float* dir, float* one, float* two, float* tree) {
+    direction = std::make_tuple(dir[0], dir[1], dir[2]);
+    vertexOne = std::make_tuple(one[0], one[1], one[2]);
+    vertexTwo = std::make_tuple(two[0], two[1], two[2]);
+    vertexTree = std::make_tuple(tree[0], tree[1], tree[2]);
 }
 
-TriangleStl::~TriangleStl() {
-    delete direction;
-    delete vertexOne;
-    delete vertexTwo;
-    delete vertexTree;
-}
+TriangleStl::~TriangleStl() = default;
 
-float* TriangleStl::getDirection() const {
+const std::tuple<float, float, float> &TriangleStl::getDirection() const {
     return direction;
 }
 
-float* TriangleStl::getVertexOne() const {
+const std::tuple<float, float, float> &TriangleStl::getVertexOne() const {
     return vertexOne;
 }
 
-float* TriangleStl::getVertexTwo() const {
+const std::tuple<float, float, float> &TriangleStl::getVertexTwo() const {
     return vertexTwo;
 }
 
-float* TriangleStl::getVertexTree() const {
+const std::tuple<float, float, float> &TriangleStl::getVertexTree() const {
     return vertexTree;
 }
+

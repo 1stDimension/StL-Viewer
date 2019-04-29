@@ -1,5 +1,9 @@
+#pragma once
 
-#ifndef STL_VIEWER_PARSERSTL_H
-#define STL_VIEWER_PARSERSTL_H
+#include "TriangleStl.h"
+#include <vector>
 
-#endif //STL_VIEWER_PARSERSTL_H
+class ParserStl{
+public:
+    std::vector<TriangleStl> parse();
+};
