@@ -2,8 +2,6 @@
 
 #include "TriangleStl.h"
 #include <vector>
+#include <fstream>
 
-class ParserStl{
-public:
-    std::vector<TriangleStl> parse();
-};
+std::vector<TriangleStl> parseFile( std::ifstream input);

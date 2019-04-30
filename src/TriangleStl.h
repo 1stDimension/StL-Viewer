@@ -1,5 +1,7 @@
 #pragma once
 
+#include <tuple>
+
 class TriangleStl {
 private:
     std::tuple<float, float, float> direction;
