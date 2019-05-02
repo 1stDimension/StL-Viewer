@@ -40,6 +40,16 @@ auto refferenceFile = "solid cube_corner\n"
 TEST_CASE( "Full check of parser capability", "[parser][full]" ) {
     REQUIRE( 0 == 1);
 }
+//TODO Parser::parseFile
+//TODO Parser::readTriangleAscii
+TEST_CASE("Check if ", "[parser]"){}
+//TODO Parser::shift
+//TODO Parser::omitWhiteSpaces
+//TODO Parser::readTriangleAscii
+//TODO Parser::
+//TODO Parser::parseAscii
+//TODO Parser::parseBin
+
 //Loader
 TEST_CASE("Check if files are loaded correctly", "[loader][full]"){
     try {
