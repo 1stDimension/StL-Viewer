@@ -3,5 +3,8 @@
 #include "TriangleStl.h"
 #include <vector>
 #include <fstream>
+class Parser{
+public:
+    static std::vector<TriangleStl> parseFile( char input[], uint64_t  size);
 
-std::vector<TriangleStl> parseFile( std::ifstream input);
+};

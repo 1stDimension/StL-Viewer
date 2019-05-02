@@ -4,6 +4,10 @@
 #include "TriangleStl.h"
 #include "parserStl.h"
 
+//TODO Load file from command line
+//TODO Check if file is an stl file If it's nor throw an exception
+
+
 int main(int argc, char** argv) {
     //check if there is 1 argument
     //check file extension is correct
