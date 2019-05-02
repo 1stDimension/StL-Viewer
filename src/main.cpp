@@ -6,13 +6,12 @@
 
 //TODO Load file from command line
 //TODO Check if file is an stl file If it's nor throw an exception
-
+//TODO Write translation untit from TriangleStl to OpenGL's/ Vulkan's triangle
 
 int main(int argc, char** argv) {
     //check if there is 1 argument
     //check file extension is correct
     //load file
-
     GLFWwindow* window;
 
     /* Initialize the library */
