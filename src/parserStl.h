@@ -5,6 +5,8 @@
 #include <fstream>
 class Parser{
 private:
+    //Return TriangleStl read from input and pointer to space after triangle
+    static std::pair<TriangleStl, char*>* readTriangleAscii(char* input, uint64_t limit);
     //Returns length of data stream ahead
     static uint64_t shift(char *input, uint64_t limit);
     //Returns offset to place after the white space what ever this may be
