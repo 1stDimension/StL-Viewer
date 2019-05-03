@@ -53,10 +53,10 @@ TEST_CASE("Parser::parseFile PC", "[parser][full]") {
 }
 //TODO Parser::readTriangleAscii
 TEST_CASE("Parser::readTriangleAscii PC", "[parser][readTriangleAscii]") {
-    float normal[] = {0.0, -1.0, 0.0};
-    float vertexOne[] = {0.0, -1.0, 0.0};
-    float vertexTwo[] = {0.0, -1.0, 0.0};
-    float vertexTree[] = {0.0, -1.0, 0.0};
+    float normal[]     = {0.0, -1.0, 0.0};
+    float vertexOne[]  = {0.0,  0.0, 0.0};
+    float vertexTwo[]  = {1.0,  0.0, 0.0};
+    float vertexTree[] = {0.0,  0.0, 1.0};
     auto reference = new TriangleStl(normal, vertexOne, vertexTwo, vertexTree);
     auto  tested   = Parser::readTriangleAscii(referenceTriangle, strlen(referenceTriangle));
     REQUIRE(tested != nullptr);

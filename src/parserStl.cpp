@@ -101,7 +101,7 @@ std::pair<TriangleStl, char *>* Parser::readTriangleAscii(char *input, uint64_t 
         limit -= shift;
 
         bool ifOuterLoop = strncmp(input, "outer loop", strlen("outer loop")) == 0;
-        if (ifOuterLoop){
+        if (ifOuterLoop){ //TODO
             input += strlen("outer loop"); //Now input point to after "outer loop"
             limit -= strlen("outer loop"); //TODO possible underflow
             shift = Parser::omitWhiteSpaces(input, limit ); //TODO change limit to prevent segmentation fault
@@ -118,6 +118,26 @@ std::pair<TriangleStl, char *>* Parser::readTriangleAscii(char *input, uint64_t 
             float* vertexTree = readVertex(input,limit,&input);
 
             //goto endfacet
+            shift = Parser::omitWhiteSpaces(input, limit ); //TODO change limit to prevent segmentation fault
+            input += shift;
+            limit -= shift;
+            bool ifEndloop = strncmp(input, "endloop", strlen("endloop")) == 0;
+            if (ifEndloop){
+                input += strlen("endloop"); //Now input point to after "endloop"
+                limit -= strlen("endloop");
+                shift = Parser::omitWhiteSpaces(input, limit ); //TODO change limit to prevent segmentation fault
+                input += shift;
+                limit -= shift;
+
+                bool ifEndfacet = strncmp(input, "endfacet", strlen("endfacet")) == 0;
+                if(ifEndfacet){
+                    input += strlen("endfacet"); //Now input point to after "endfacet"
+                    limit -= strlen("endfacet");
+                }else
+                    return nullptr;
+            }else
+                return nullptr;
+
             TriangleStl triangleStl ( facet,vertexOne, vertexTwo, vertexTree);
             return new std::pair<TriangleStl, char*>( triangleStl,input);
 
