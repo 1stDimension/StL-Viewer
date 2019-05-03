@@ -61,6 +61,11 @@ uint64_t Parser::shift(char *input, uint64_t limit) {
     }
     return index;
 }
+//TODO Add possibility of Error checking
+uint64_t readVertex(char* input, uint64_t limit){
+
+}
+
 
 //TODO create function that reads input and returns one triangle and pointer to after triangle
 std::pair<TriangleStl, char *> *Parser::readTriangleAscii(char *input, uint64_t limit) {
@@ -69,6 +74,26 @@ std::pair<TriangleStl, char *> *Parser::readTriangleAscii(char *input, uint64_t 
     bool ifFacetbegin = strncmp(input, "facet normal", strlen("facet normal")) == 0;
     if (ifFacetbegin) {
         input += strlen("facet normal"); //Now input point to after "facet normal"
+        limit -= strlen("facet normal"); //TODO possible underflow
+        float ni = strtof(input, &input);//TODO fix possible segmentation fault
+        float nj = strtof(input, &input);//TODO fix possible segmentation fault
+        float nk = strtof(input, &input);//TODO fix possible segmentation fault
+
+        uint64_t shift = Parser::omitWhiteSpaces(input, limit ); //TODO change limit to prevent segmentation fault
+        input += shift;
+        limit -= shift;
+
+        bool ifOuterLoop = strncmp(input, "outer loop", strlen("outer loop")) == 0;
+        if (ifOuterLoop){
+            input += strlen("outer loop"); //Now input point to after "outer loop"
+            limit -= strlen("outer loop"); //TODO possible underflow
+            shift = Parser::omitWhiteSpaces(input, limit ); //TODO change limit to prevent segmentation fault
+            input += shift;
+            limit -= shift;
+
+        } else
+        return nullptr;
+
     } else
         return nullptr;
 }

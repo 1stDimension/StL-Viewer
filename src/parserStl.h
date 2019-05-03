@@ -4,7 +4,8 @@
 #include <vector>
 #include <fstream>
 class Parser{
-private:
+public:
+
     //Return TriangleStl read from input and pointer to space after triangle
     static std::pair<TriangleStl, char*>* readTriangleAscii(char* input, uint64_t limit);
     //Returns length of data stream ahead

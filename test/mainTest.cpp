@@ -7,8 +7,8 @@
 #include "Loader.h"
 #include <string>
 
-auto referenceTringle = "facet normal 0.0 -1.0 0.0\n"
-                        "            outer loop\n"
+char* referenceTringle = "facet normal 0.0 -1.0 0.0\n"
+                            "            outer loop\n"
                         "              vertex 0.0 0.0 0.0\n"
                         "              vertex 1.0 0.0 0.0\n"
                         "              vertex 0.0 0.0 1.0\n"
@@ -46,36 +46,40 @@ auto referenceFile = "solid cube_corner\n"
                       "endsolid";
 //Parser:
 //TODO Parser::parseFile
-TEST_CASE( "Parser::parseFile PC", "[parser][full]" ) {
-    REQUIRE( 0 == 1);
+TEST_CASE("Parser::parseFile PC", "[parser][full]") {
+    REQUIRE(0 == 1);
 }
 //TODO Parser::readTriangleAscii
-TEST_CASE("Parser::readTriangleAscii PC", "[parser][readTriangleAscii]"){
-    float normal [] = {0.0, -1.0, 0.0};
-    float vertexOne [] = {0.0, -1.0, 0.0};
-    float vertexTwo [] = {0.0, -1.0, 0.0};
-    float vertexTree [] = {0.0, -1.0, 0.0}
-    TriangleStl reference ( normal, vertexOne, vertexTwo, vertexTree);
-
-    REQUIRE( 0 == 1);
+TEST_CASE("Parser::readTriangleAscii PC", "[parser][readTriangleAscii]") {
+    float normal[] = {0.0, -1.0, 0.0};
+    float vertexOne[] = {0.0, -1.0, 0.0};
+    float vertexTwo[] = {0.0, -1.0, 0.0};
+    float vertexTree[] = {0.0, -1.0, 0.0};
+    auto reference = new TriangleStl(normal, vertexOne, vertexTwo, vertexTree);
+    auto  tested   = Parser::readTriangleAscii(referenceTringle, strlen(referenceTringle));
+    REQUIRE(tested != nullptr);
+    auto testedTriangle = tested->first;
+    REQUIRE(reference->getDirection() == testedTriangle.getDirection());
+    REQUIRE(reference->getVertexOne() == testedTriangle.getVertexOne());
+    REQUIRE(reference->getVertexTwo() == testedTriangle.getVertexTwo());
+    REQUIRE(reference->getVertexTree() == testedTriangle.getVertexTree());
 }
 //TODO Parser::shift
-TEST_CASE("Parser::shift PC", "[parser][shift]"){
-    REQUIRE( 0 == 1);
+TEST_CASE("Parser::shift PC", "[parser][shift]") {
+    REQUIRE(0 == 1);
 }
 //TODO Parser::omitWhiteSpaces
-TEST_CASE("Parser::omitWhiteSpaces PC", "[parser][omitWhiteSpaces]"){
-    REQUIRE( 0 == 1);
+TEST_CASE("Parser::omitWhiteSpaces PC", "[parser][omitWhiteSpaces]") {
+    REQUIRE(0 == 1);
 }
 //TODO Parser::parseAscii
-TEST_CASE("Parser::parseAscii PC", "[parser][parseAscii]"){
-    REQUIRE( 0 == 1);
+TEST_CASE("Parser::parseAscii PC", "[parser][parseAscii]") {
+    REQUIRE(0 == 1);
 }
 //TODO Parser::parseBin
-TEST_CASE("Parser::parseBin PC", "[parser][parseBin]"){
-    REQUIRE( 0 == 1);
+TEST_CASE("Parser::parseBin PC", "[parser][parseBin]") {
+    REQUIRE(0 == 1);
 }
-
 //Loader
 TEST_CASE("Check if files are loaded correctly", "[loader][full]"){
     try {
