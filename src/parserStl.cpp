@@ -62,13 +62,31 @@ uint64_t Parser::shift(char *input, uint64_t limit) {
     return index;
 }
 //TODO Add possibility of Error checking
-uint64_t readVertex(char* input, uint64_t limit){
+float* readVertex(char* input, uint64_t limit, char** endPtr){
+    bool ifVertex = strncmp(input, "vertex", strlen("vertex")) == 0;
+    if(ifVertex){
+        input += strlen("vertex");
+        limit -= strlen("vertex"); //TODO fix possible underflow
 
+        auto output = new float[3]; //TODO possible out of memory
+        char *tmp;
+        for(int i =0 ; i < 3; i++){
+            tmp = input;
+            output[i] = strtof(input, &input);
+            if(tmp == input) {//error no conversion was performed
+                *endPtr = tmp+1;
+                return nullptr;
+            }
+            limit -= input - tmp;
+        }
+        *endPtr = input;
+        return output;
+    }else
+        return nullptr;
 }
 
-
 //TODO create function that reads input and returns one triangle and pointer to after triangle
-std::pair<TriangleStl, char *> *Parser::readTriangleAscii(char *input, uint64_t limit) {
+std::pair<TriangleStl, char *>* Parser::readTriangleAscii(char *input, uint64_t limit) {
     //facet normal ni nj nk
     //TODO fix possible segmentation fault
     bool ifFacetbegin = strncmp(input, "facet normal", strlen("facet normal")) == 0;
@@ -78,7 +96,7 @@ std::pair<TriangleStl, char *> *Parser::readTriangleAscii(char *input, uint64_t 
         float ni = strtof(input, &input);//TODO fix possible segmentation fault
         float nj = strtof(input, &input);//TODO fix possible segmentation fault
         float nk = strtof(input, &input);//TODO fix possible segmentation fault
-
+        float facet []= { ni, nj, nk };
         uint64_t shift = Parser::omitWhiteSpaces(input, limit ); //TODO change limit to prevent segmentation fault
         input += shift;
         limit -= shift;
@@ -90,6 +108,13 @@ std::pair<TriangleStl, char *> *Parser::readTriangleAscii(char *input, uint64_t 
             shift = Parser::omitWhiteSpaces(input, limit ); //TODO change limit to prevent segmentation fault
             input += shift;
             limit -= shift;
+            float* vertexOne =  readVertex(input,limit,&input);
+            float* vertexTwo =  readVertex(input,limit,&input);
+            float* vertexTree = readVertex(input,limit,&input);
+
+            //goto endfacet
+            TriangleStl triangleStl ( facet,vertexOne, vertexTwo, vertexTree);
+            return new std::pair<TriangleStl, char*>( triangleStl,input);
 
         } else
         return nullptr;
