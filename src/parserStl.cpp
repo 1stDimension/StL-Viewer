@@ -62,7 +62,7 @@ uint64_t Parser::shift(char *input, uint64_t limit) {
     return index;
 }
 //TODO Add possibility of Error checking
-float* readVertex(char* input, uint64_t limit, char** endPtr){
+float* Parser::readVertex(char* input, uint64_t limit, char** endPtr){
     bool ifVertex = strncmp(input, "vertex", strlen("vertex")) == 0;
     if(ifVertex){
         input += strlen("vertex");
@@ -84,7 +84,6 @@ float* readVertex(char* input, uint64_t limit, char** endPtr){
     }else
         return nullptr;
 }
-
 //TODO create function that reads input and returns one triangle and pointer to after triangle
 std::pair<TriangleStl, char *>* Parser::readTriangleAscii(char *input, uint64_t limit) {
     //facet normal ni nj nk
@@ -107,9 +106,15 @@ std::pair<TriangleStl, char *>* Parser::readTriangleAscii(char *input, uint64_t 
             limit -= strlen("outer loop"); //TODO possible underflow
             shift = Parser::omitWhiteSpaces(input, limit ); //TODO change limit to prevent segmentation fault
             input += shift;
-            limit -= shift;
-            float* vertexOne =  readVertex(input,limit,&input);
+            limit -= shift; //TODO possible underflow
+            float* vertexOne =  readVertex(input,limit,&input); //TODO
+            shift = Parser::omitWhiteSpaces(input, limit ); //TODO change limit to prevent segmentation fault
+            input += shift;
+            limit -= shift; //TODO possible underflow
             float* vertexTwo =  readVertex(input,limit,&input);
+            shift = Parser::omitWhiteSpaces(input, limit ); //TODO change limit to prevent segmentation fault
+            input += shift;
+            limit -= shift; //TODO possible underflow
             float* vertexTree = readVertex(input,limit,&input);
 
             //goto endfacet

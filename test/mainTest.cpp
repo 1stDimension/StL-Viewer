@@ -7,7 +7,9 @@
 #include "Loader.h"
 #include <string>
 
-char* referenceTringle = "facet normal 0.0 -1.0 0.0\n"
+char* referenceVertex = "vertex 0.0 0.0 0.0\n";
+
+char* referenceTriangle = "facet normal 0.0 -1.0 0.0\n"
                             "            outer loop\n"
                         "              vertex 0.0 0.0 0.0\n"
                         "              vertex 1.0 0.0 0.0\n"
@@ -56,13 +58,23 @@ TEST_CASE("Parser::readTriangleAscii PC", "[parser][readTriangleAscii]") {
     float vertexTwo[] = {0.0, -1.0, 0.0};
     float vertexTree[] = {0.0, -1.0, 0.0};
     auto reference = new TriangleStl(normal, vertexOne, vertexTwo, vertexTree);
-    auto  tested   = Parser::readTriangleAscii(referenceTringle, strlen(referenceTringle));
+    auto  tested   = Parser::readTriangleAscii(referenceTriangle, strlen(referenceTriangle));
     REQUIRE(tested != nullptr);
     auto testedTriangle = tested->first;
     REQUIRE(reference->getDirection() == testedTriangle.getDirection());
     REQUIRE(reference->getVertexOne() == testedTriangle.getVertexOne());
     REQUIRE(reference->getVertexTwo() == testedTriangle.getVertexTwo());
     REQUIRE(reference->getVertexTree() == testedTriangle.getVertexTree());
+}
+//TODO Parser::readVertex
+TEST_CASE("Parser::readVertex PC", "[parser][shift]") {
+    char* end = nullptr;
+    float* tested = Parser::readVertex(referenceVertex, strlen(referenceVertex), &end);
+    float epsilon = 0.000001;
+    REQUIRE(tested != nullptr);
+    CHECK((tested[0] - 0.0f) < epsilon);
+    CHECK((tested[1] - 0.0f) < epsilon);
+    CHECK((tested[2] - 0.0f) < epsilon);
 }
 //TODO Parser::shift
 TEST_CASE("Parser::shift PC", "[parser][shift]") {
