@@ -3,15 +3,25 @@
 #include <iostream>
 #include "TriangleStl.h"
 #include "parserStl.h"
+#include "Loader.h"
 
 //TODO Load file from command line
 //TODO Check if file is an stl file If it's nor throw an exception
 //TODO Write translation untit from TriangleStl to OpenGL's/ Vulkan's triangle
 
 int main(int argc, char** argv) {
-    //check if there is 1 argument
-    //check file extension is correct
-    //load file
+    if(argc <= 1) {
+        std::cout << "Too few arguments" << std::endl;
+        return 1;
+    }
+    std::tuple<char* , uint64_t > loadedData;
+    try{
+        loadedData = Loader::loadFile(argv[1]);
+    }
+    catch (std::exception& e){
+        std::cout<< e.what()<<std::endl;
+        return 2;
+    }
     GLFWwindow* window;
 
     /* Initialize the library */

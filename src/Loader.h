@@ -7,7 +7,7 @@
 
 class Loader {
 public:
-    std::tuple<char *, uint64_t> loadFile(const std::string& name);
+    static std::tuple<char *, uint64_t> loadFile(char* name);
 };
 
 
