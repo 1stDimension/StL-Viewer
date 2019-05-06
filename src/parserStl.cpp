@@ -45,6 +45,27 @@ std::vector<TriangleStl> *Parser::parseAscii(char *input, uint64_t size) {
 
 //TODO Create parser of binary files
 std::vector<TriangleStl> *Parser::parseBin(char *input, uint64_t size) {
+    //TODO check if size is big enough
+    //TODO consider using pointer incrementation for speed up
+    uint32_t numberOfFacets = 0;
+    uint64_t index = 0;
+
+    for(int i = 0; i < 3; i++){
+        numberOfFacets += input[i];
+        numberOfFacets = numberOfFacets << 1;
+    }
+    index += 4;
+    size  -= 4;
+
+    while (numberOfFacets > 0){
+
+
+
+        //TODO Omit 2 byte attribute byte count
+        numberOfFacets--;
+    }
+
+
     return nullptr;
 }
 
