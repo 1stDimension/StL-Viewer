@@ -53,6 +53,7 @@ TEST_CASE("Parser::parseFile PC", "[parser][full]") {
     REQUIRE(tested != nullptr);
     REQUIRE(!tested->empty());
     REQUIRE(tested->size() == 4);
+//    TODO make precise tests
 }
 //TODO Parser::readTriangleAscii
 TEST_CASE("Parser::readTriangleAscii PC", "[parser][readTriangleAscii]") {
