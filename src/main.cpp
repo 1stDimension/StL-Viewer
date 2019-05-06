@@ -52,10 +52,10 @@ int main(int argc, char** argv) {
     glVertexAttribPointer( 0, 2, GL_FLOAT, false, 2 * sizeof(float),  0 );
 
     ShaderHandler shaderHandler;
-    std::tuple<char *, uint64_t > vertexShader = Loader::loadFile( "Vertex_HelloWorld.glsl");
+    std::tuple<char *, uint64_t > vertexShader = Loader::loadFile( "../shaders/Vertex_HelloWorld.glsl");
     shaderHandler.addShader( GL_VERTEX_SHADER, std::get<0>(vertexShader));
 
-    std::tuple<char *, uint64_t > fragmentShader = Loader::loadFile( "Fragment_HelloWorld.glsl");
+    std::tuple<char *, uint64_t > fragmentShader = Loader::loadFile( "../shaders/Fragment_HelloWorld.glsl");
     shaderHandler.addShader( GL_FRAGMENT_SHADER, std::get<0>(fragmentShader));
     shaderHandler.buildShader();
     glUseProgram(shaderHandler.getId());
