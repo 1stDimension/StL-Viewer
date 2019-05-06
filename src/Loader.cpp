@@ -7,7 +7,7 @@
 
 //Loads entire file into memory as char []
 
-std::tuple<char *, uint64_t> Loader::loadFile(char * name) {
+std::tuple<char *, uint64_t> Loader::loadFile(const char * name) {
     std::ifstream input (name, std::ifstream::binary | std::ifstream::in);
     if(!input.is_open()) throw BadFileException();
     auto buffer = input.rdbuf();

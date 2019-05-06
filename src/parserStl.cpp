@@ -10,7 +10,6 @@
 
 
 std::vector<TriangleStl> *Parser::parseFile(char input[], uint64_t size) {
-    auto output = new std::vector<TriangleStl>();
     uint64_t index = 0;
     auto reference = "solid";
     bool ifText = strncmp(input, reference, strlen(reference)) == 0;
@@ -25,15 +24,20 @@ std::vector<TriangleStl> *Parser::parseFile(char input[], uint64_t size) {
 std::vector<TriangleStl> *Parser::parseAscii(char *input, uint64_t size) {
     auto output = new std::vector<TriangleStl>;
     uint64_t afterWhiteSpace = omitWhiteSpaces(input, size);
-    uint64_t nameLength = shift(input + afterWhiteSpace, size - afterWhiteSpace);
-    char* trianglesStart = input + afterWhiteSpace + nameLength;
+    input += afterWhiteSpace;
+    uint64_t nameLength = shift(input, size - afterWhiteSpace);
+    input += nameLength;
+    afterWhiteSpace = omitWhiteSpaces(input, size);
+    input += afterWhiteSpace;
     //TODO fix possible segmentation fault of strncmp it can reach out besides input + size
-    while (strncmp(trianglesStart, "endsolid", strlen("endsolid")) != 0) {
+    //TODO Decrease the size as it goes
+    while (strncmp(input, "endsolid", strlen("endsolid")) != 0) {
         //omit white spaces
         auto tuple = readTriangleAscii(input, size);
         if(tuple != nullptr) {//if there was a TriangleStl
             output->push_back(tuple->first);
             input = tuple->second;
+            input += Parser::omitWhiteSpaces(input , size);
         } //TODO if three was an error while getting triangle
     }
     return output;
