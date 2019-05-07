@@ -48,12 +48,21 @@ char* referenceFile = "solid cube_corner\n"
                       "endsolid";
 //Parser:
 //TODO Parser::parseFile
-TEST_CASE("Parser::parseFile PC", "[parser][full]") {
+TEST_CASE("Parser::parseFile ascii PC", "[parser][full][ascii]") {
     auto tested = Parser::parseFile(referenceFile, strlen(referenceFile));
     REQUIRE(tested != nullptr);
     REQUIRE(!tested->empty());
     REQUIRE(tested->size() == 4);
 //    TODO make precise tests
+} //TODO mock somehow binary file
+TEST_CASE("Parser::parseFile bin PC", "[parser][full][bin]") {
+    std::tuple<char *, uint64_t> reference = Loader::loadFile("exampleBin.stl");
+    std::vector<TriangleStl> * tested = Parser::parseFile(std::get<0>(reference), std::get<1>(reference));
+    REQUIRE(tested != nullptr);
+    REQUIRE(!tested->empty());
+    REQUIRE(tested->size() == 4);
+//    TODO make precise tests compering triangles
+    delete tested;
 }
 //TODO Parser::readTriangleAscii
 TEST_CASE("Parser::readTriangleAscii PC", "[parser][readTriangleAscii]") {

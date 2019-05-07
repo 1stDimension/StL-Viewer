@@ -52,12 +52,23 @@ std::vector<TriangleStl> *Parser::parseBin(char *input, uint64_t size) {
 
     for(int i = 0; i < 3; i++){
         numberOfFacets += input[i];
-        numberOfFacets = numberOfFacets << 1;
+        numberOfFacets = numberOfFacets << 1u;
     }
     index += 4;
+    numberOfFacets += input[index]; //TODO fix possible segmentation fault
     size  -= 4;
 
     while (numberOfFacets > 0){
+        uint32_t processed = 0;
+
+        for(int i = 0; i < 3 ; i++) {
+            processed += input[i];
+            processed = processed << 1u;
+        }
+        index += 4;
+        processed += input[index]; //TODO fix possible segmentation fault
+
+        float normalX = reinterpret_cast<float &>(processed); //TODO fix potential failure in compilers that follow strict-aliasing semantics
 
 
 
