@@ -16,13 +16,13 @@ void ShaderHandler::addShader(unsigned int type, const char *source) {
         glShaderSource(shaderId, 1, &source, nullptr);
         glCompileShader(shaderId);
 
-        int reasult;
-        glGetShaderiv(shaderId, GL_COMPILE_STATUS, &reasult);
-        if (reasult == GL_FALSE){
-            int lenght;
-            glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &lenght);
-            char errorMassage[lenght];
-            glGetShaderInfoLog(shaderId, lenght, &lenght, errorMassage);
+        int result;
+        glGetShaderiv(shaderId, GL_COMPILE_STATUS, &result);
+        if (result == GL_FALSE){
+            int length;
+            glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &length);
+            char errorMassage[length];
+            glGetShaderInfoLog(shaderId, length, &length, errorMassage);
             std::cout << "***** ERROR ***** ID = "<< this->id << std::endl;
             std::cout << errorMassage << std::endl;
         }
