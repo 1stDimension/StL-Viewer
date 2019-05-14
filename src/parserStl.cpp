@@ -124,8 +124,8 @@ float* Parser::readVertex(char* input, uint64_t limit, char** endPtr){
 std::pair<TriangleStl, char *>* Parser::readTriangleAscii(char *input, uint64_t limit) {
     //facet normal ni nj nk
     //TODO fix possible segmentation fault
-    bool ifFacetbegin = strncmp(input, "facet normal", strlen("facet normal")) == 0;
-    if (ifFacetbegin) {
+    bool ifFacetBegin = strncmp(input, "facet normal", strlen("facet normal")) == 0;
+    if (ifFacetBegin) {
         input += strlen("facet normal"); //Now input point to after "facet normal"
         limit -= strlen("facet normal"); //TODO possible underflow
         float ni = strtof(input, &input);//TODO fix possible segmentation fault

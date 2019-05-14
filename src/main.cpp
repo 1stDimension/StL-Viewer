@@ -39,15 +39,24 @@ int main(int argc, char** argv) {
 
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
+    glfwSwapInterval(1);
+
     /* Use Glad for modern openGL*/
     int status = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
 
-    float example [6] = {-0.5f, -0.5f, 0.0f, 0.5f, 0.5f, -0.5f};
-    std::cout<< example[0] <<std::endl;
+    float example [] = {
+            -0.5f, -0.5f,
+             0.5f,  0.5f,
+             0.5f, -0.5f,
+
+             0.4f,  0.5f,
+            -0.6f,  0.5f,
+            -0.6f, -0.5f
+    };
     unsigned int vertices;
     glGenBuffers(1, &vertices);
     glBindBuffer(GL_ARRAY_BUFFER, vertices);
-    glBufferData(GL_ARRAY_BUFFER, 6 *sizeof(float), example, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(example), example, GL_STATIC_DRAW);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer( 0, 2, GL_FLOAT, false, 2 * sizeof(float),  0 );
 
@@ -60,13 +69,28 @@ int main(int argc, char** argv) {
     shaderHandler.buildShader();
     glUseProgram(shaderHandler.getId());
 
+
+    int location = glGetUniformLocation(shaderHandler.getId(), "u_Color");
+
+    float b = 0.0f;
+    float slope = 0.05f;
+
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glDrawArrays(GL_TRIANGLES, 0, 3); // Draw coll
+        if(location != -1)
+            glUniform4f(location, 1.0f, 1.0f, b, 1.0f);
+        if(b > 1.0f)
+            slope *= -1;
+        else if(b < 0.0f)
+            slope *= -1;
+
+        b += slope;
+
+        glDrawArrays(GL_TRIANGLES, 0, 6); // Draw coll
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);

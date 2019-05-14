@@ -18,6 +18,7 @@ include_directories(src)
 
 include_directories(${LIBS_DIR}/glfw/include)
 include_directories( ${LIBS_DIR}/glad/include)
+include_directories(${LIBS_DIR}/glm/)
 #include_directories( ${LIBS_DIR}/libs/glad/include)
 
 link_directories(${CMAKE_SOURCE_DIR}/lib)
