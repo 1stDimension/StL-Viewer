@@ -49,9 +49,9 @@ int main(int argc, char** argv) {
              0.5f,  0.5f,
              0.5f, -0.5f,
 
-             0.4f,  0.5f,
-            -0.6f,  0.5f,
-            -0.6f, -0.5f
+             0.5f,  0.5f,
+            -0.5f,  0.5f,
+            -0.5f, -0.5f
     };
     unsigned int vertices;
     glGenBuffers(1, &vertices);

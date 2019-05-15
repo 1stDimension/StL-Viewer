@@ -26,7 +26,7 @@ link_directories(${CMAKE_SOURCE_DIR}/lib)
 add_subdirectory(src)
 add_subdirectory(libs)
 
-target_link_libraries(${EXECUTABLE_NAME}  glfw3)
+target_link_libraries(${EXECUTABLE_NAME}  glfw)
 target_link_libraries(${EXECUTABLE_NAME}  glad)
 
 #aux_source_directory(./src SOURCE)
