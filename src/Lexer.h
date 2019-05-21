@@ -8,8 +8,6 @@ class Lexer {
     char buffer[128] = {0}; //TODO consider decreasing size of buffer
 public:
     Lexer(std::ifstream* input);
-
-public:
     char* getNext();
 };
 
