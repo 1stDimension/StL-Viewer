@@ -1,5 +1,5 @@
 #include <fstream>
-#include "parserStl.h"
+#include "ParserStl.h"
 #include <cstdint>
 #include <cstring>
 #include <cstdlib>
@@ -9,34 +9,32 @@
 //TODO check if file is of a right size
 
 
-std::vector<TriangleStl *> * Parser::parseFile() {
+std::vector<TriangleStl *> * ParserStl::parseFile() {
     lexer = new Lexer(input);
     char *identifier = lexer->getNextString();
     auto reference = "solid";
     if (strcmp(reference, identifier) == 0)
         return parseAscii();
-    else
+    else {
+        lexer->binaryMode();
         return parseBin(); //skip the 80 bytes long header
+    }
 }
 
 //TODO Create parser of ASCII files
 //TODO Check if keywords are strictly correct
-std::vector<TriangleStl *> * Parser::parseAscii() {
+std::vector<TriangleStl *> * ParserStl::parseAscii() {
 //    TODO consider changing initial size
     auto output = new std::vector<TriangleStl*>(20);
     return output;
 }
 
 //TODO Create parser of binary files
-std::vector<TriangleStl *> *Parser::parseBin() {
-    int Nfaces;
-    {
-        float tmp = lexer->getNextFloat();
-        Nfaces = reinterpret_cast<int &>(tmp);
-    }
-    auto output = new std::vector<TriangleStl *>(Nfaces);
+std::vector<TriangleStl *> *ParserStl::parseBin() {
+    uint32_t NumberFaces = lexer->getNext32int();
+    auto output = new std::vector<TriangleStl *>(NumberFaces);
 
-    for (uint64_t i = 0; i < Nfaces; i++) {
+    for (uint64_t i = 0; i < NumberFaces; i++) {
         auto direction = new float[3];
         auto vertexOne = new float[3];
         auto vertexTwo = new float[3];
@@ -58,13 +56,18 @@ std::vector<TriangleStl *> *Parser::parseBin() {
         vertexTree[0] = lexer->getNextFloat();
         vertexTree[1] = lexer->getNextFloat();
         vertexTree[2] = lexer->getNextFloat();
+
+        lexer->getNext16int();
+
         auto triangleStl = new TriangleStl(direction, vertexOne, vertexTwo, vertexTree);
         output->push_back(triangleStl);
     }
-//TODO Think what to do when there where incorectlly loaded fies
+//TODO Think what to do when there where incorrectly loaded fies
+    delete lexer;
     return output;
 }
 
-Parser::Parser(std::ifstream *input) {
+ParserStl::ParserStl(std::ifstream *input) {
     this->input = input;
+    lexer = nullptr;
 }

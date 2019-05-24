@@ -5,7 +5,7 @@
 #include <fstream>
 #include "Lexer.h"
 
-class Parser {
+class ParserStl {
     std::ifstream* input;
     Lexer* lexer;
     std::vector<TriangleStl *> * parseBin();
@@ -13,7 +13,7 @@ class Parser {
     std::vector<TriangleStl *> * parseAscii();
 
 public:
-    Parser(std::ifstream* input);
+    ParserStl(std::ifstream* input);
 
     std::vector<TriangleStl *> * parseFile();
 

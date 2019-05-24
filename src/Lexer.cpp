@@ -16,8 +16,7 @@ Lexer::Lexer(std::ifstream *input) {
 char *Lexer::getNextString() {
     if (input->is_open()) {
         if (!(input->eof())) {
-            *(this->input) >> std::setw(80) >> buffer;
-            std::cout << "\tgetNextString" << input->gcount();
+            *(this->input) >>  buffer;
             char tokenLength = strlen(buffer);
             char *tmp = new char[tokenLength + 1];
             if(tokenLength == 0){
@@ -37,7 +36,7 @@ float Lexer::getNextFloat() {
         if (!(input->eof())) {
             float output;
             input->read(reinterpret_cast<char *>(&output), sizeof(output));
-            std::cout << "\tgetNextFloat" << input->gcount(); //TODO remove in release
+            std::cout << "\tgetNextFloat " << input->gcount() << std::endl; //TODO remove in release
             return output;
         }
     }//TODO rise an error
@@ -45,8 +44,29 @@ float Lexer::getNextFloat() {
 }
 
 void Lexer::binaryMode() {
-    int read = input->gcount();
-    if (read >= 80)
-        return; //TODO rise an error
-    input->ignore(80 - read);
+    input->seekg(80);
+}
+
+uint32_t Lexer::getNext32int() {
+    if (input->is_open()) {
+        if (!(input->eof())) {
+            uint32_t output;
+            input->read(reinterpret_cast<char *>(&output), sizeof(output));
+            std::cout << "\tgetNext32int " << input->gcount() << std::endl; //TODO remove in release
+            return output;
+        }
+    }//TODO rise an error
+    return 0;
+}
+
+uint16_t Lexer::getNext16int() {
+    if (input->is_open()) {
+        if (!(input->eof())) {
+            uint16_t output;
+            input->read(reinterpret_cast<char *>(&output), sizeof(output));
+            std::cout << "\tgetNext16int " << input->gcount() << std::endl; //TODO remove in release
+            return output;
+        }
+    }//TODO rise an error
+    return 0;
 }
