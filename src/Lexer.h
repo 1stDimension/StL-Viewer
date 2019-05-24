@@ -6,7 +6,8 @@
 class Lexer {
     std::ifstream* input;
     char buffer[128] = {0}; //TODO consider decreasing size of buffer
-    //TODO make buffer only allocated on
+    //TODO make buffer only allocated on the heap
+//    TODO Let change of ifstream after parseing
 public:
     Lexer(std::ifstream* input);
     char* getNextString(); //Asks Lexer for next string of non white space characters. Should be used only in tekst mode

@@ -37,7 +37,7 @@ float Lexer::getNextFloat() {
         if (!(input->eof())) {
             float output;
             input->read(reinterpret_cast<char *>(&output), sizeof(output));
-            std::cout << "\tgetNextFloat" << input->gcount();
+            std::cout << "\tgetNextFloat" << input->gcount(); //TODO remove in release
             return output;
         }
     }//TODO rise an error

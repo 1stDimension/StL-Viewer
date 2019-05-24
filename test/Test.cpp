@@ -50,7 +50,7 @@ char *referenceFile = "solid cube_corner\n"
 //Parser:
 //TODO Parser::parseFile
 TEST_CASE("Parser::parseFile ascii PC", "[parser][full][ascii]") {
-auto tested = Parser::parseFile(referenceFile, strlen(referenceFile));
+auto tested = Parser::parseFile();
 REQUIRE(tested != nullptr);
 REQUIRE(!tested->empty());
 REQUIRE(tested->size() == 4);
@@ -60,7 +60,7 @@ REQUIRE(tested->size() == 4);
 TEST_CASE("Parser::parseFile bin PC", "[parser][full][bin]") {
 std::tuple<char *, uint64_t> reference = Loader::loadFile(
         "exampleBin.stl");
-std::vector<TriangleStl> *tested = Parser::parseFile(std::get<0>(reference), std::get<1>(reference));
+std::vector<TriangleStl> *tested = Parser::parseFile();
 REQUIRE(tested != nullptr);
 REQUIRE(!tested->empty());
 REQUIRE(tested->size() == 4);
