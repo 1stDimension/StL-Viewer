@@ -18,7 +18,6 @@ TEST_CASE("Check if ParserStl parses bin file and returns correct vector of Trai
     auto triangles = parser->parseFile();
     REQUIRE(triangles != nullptr);
     REQUIRE(!triangles->empty());
-    std::cout << "\t" << triangles->size() <<std::endl;
     pIfstream->close();
     delete pIfstream;
     delete parser;

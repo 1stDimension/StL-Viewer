@@ -36,7 +36,6 @@ float Lexer::getNextFloat() {
         if (!(input->eof())) {
             float output;
             input->read(reinterpret_cast<char *>(&output), sizeof(output));
-            std::cout << "\tgetNextFloat " << input->gcount() << std::endl; //TODO remove in release
             return output;
         }
     }//TODO rise an error
@@ -52,7 +51,6 @@ uint32_t Lexer::getNext32int() {
         if (!(input->eof())) {
             uint32_t output;
             input->read(reinterpret_cast<char *>(&output), sizeof(output));
-            std::cout << "\tgetNext32int " << input->gcount() << std::endl; //TODO remove in release
             return output;
         }
     }//TODO rise an error
@@ -64,7 +62,6 @@ uint16_t Lexer::getNext16int() {
         if (!(input->eof())) {
             uint16_t output;
             input->read(reinterpret_cast<char *>(&output), sizeof(output));
-            std::cout << "\tgetNext16int " << input->gcount() << std::endl; //TODO remove in release
             return output;
         }
     }//TODO rise an error
