@@ -2,7 +2,7 @@
 #include "Catch/catch.hpp"
 #include <cstring>
 //LEXER
-TEST_CASE("Check if lexer loads part of ASCI file and returns a correct token", "[lexer][getNextString]") {
+TEST_CASE("Check if lexer loads part of ASCI file and returns a correct token", "[parserStl][parseFile]") {
     auto pifstream = new std::ifstream("./example.stl", std::ifstream::in | std::ifstream::binary);
     auto lexer = new Lexer(pifstream);
     while (!(pifstream->eof())) {
@@ -16,7 +16,7 @@ TEST_CASE("Check if lexer loads part of ASCI file and returns a correct token", 
     delete pifstream;
 }
 const float reference = -13.0f;
-TEST_CASE("Check if lexer loads part of Binary file and returns a correct token", "[lexer][getNextFloat]"){
+TEST_CASE("Check if lexer loads part of Binary file and returns a correct token", "[parserStl][parseFile]"){
     auto pifstream = new std::ifstream("./exampleBin.stl", std::ifstream::in | std::ifstream::binary);
     auto lexer = new Lexer(pifstream);
     char* tmp = new char[1];

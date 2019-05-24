@@ -78,7 +78,7 @@ REQUIRE(0 == 1);
 //Loader
 TEST_CASE("Check if files are loaded correctly", "[loader][full]") {
 try {
-const std::string file = "";
+const std::string file;
 std::tuple<char *, uint64_t> loaded;
 REQUIRE_NOTHROW(loaded = Loader::loadFile(file.c_str()));
 REQUIRE(strncmp(std::get<0>(loaded), referenceFile, std::get<1>(loaded)) == 0);

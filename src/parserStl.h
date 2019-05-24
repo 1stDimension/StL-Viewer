@@ -8,13 +8,13 @@
 class Parser {
     std::ifstream* input;
     Lexer* lexer;
+    std::vector<TriangleStl *> * parseBin();
+
+    std::vector<TriangleStl *> * parseAscii();
+
 public:
     Parser(std::ifstream* input);
 
-    std::vector<TriangleStl> *parseFile();
-
-    std::vector<TriangleStl> *parseBin();
-
-    std::vector<TriangleStl> *parseAscii();
+    std::vector<TriangleStl *> * parseFile();
 
 };
