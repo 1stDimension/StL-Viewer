@@ -8,6 +8,9 @@
 class ParserStl {
     std::ifstream* input;
     Lexer* lexer;
+
+    void cleanUp();
+
     std::vector<TriangleStl *> * parseBin();
 
     std::vector<TriangleStl *> * parseAscii();

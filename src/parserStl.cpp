@@ -26,6 +26,26 @@ std::vector<TriangleStl *> * ParserStl::parseFile() {
 std::vector<TriangleStl *> * ParserStl::parseAscii() {
 //    TODO consider changing initial size
     auto output = new std::vector<TriangleStl*>(20);
+
+    char* token;
+    token = lexer->getNextString(); // we got name
+
+    while (token != nullptr){
+        if( strcmp(token, "facet") == 0){
+            delete token;
+            token = lexer->getNextString();
+            if( strcmp(token, "normal") == 0){
+//TODO Get 3 chars and convert them to
+//TODO Get 2 chars and compare them to outer loop
+//TODO load vertex 3 times
+//TODO check if triangle is ended correctly
+
+            }
+        }
+    }
+//    TODO check if file end with endsolid
+
+    cleanUp();
     return output;
 }
 
@@ -63,11 +83,15 @@ std::vector<TriangleStl *> *ParserStl::parseBin() {
         output->push_back(triangleStl);
     }
 //TODO Think what to do when there where incorrectly loaded fies
-    delete lexer;
+    cleanUp();
     return output;
 }
 
 ParserStl::ParserStl(std::ifstream *input) {
     this->input = input;
     lexer = nullptr;
+}
+
+void ParserStl::cleanUp() {
+    delete lexer;
 }
