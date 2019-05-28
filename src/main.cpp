@@ -2,9 +2,10 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "TriangleStl.h"
-#include "parserStl.h"
+#include "ParserStl.h"
 #include "Loader.h"
 #include "ShaderHandler.h"
+#include "EventSystem.h"
 
 //TODO Check if file is an stl file If it's nor throw an exception
 //TODO Write translation unit from TriangleStl to OpenGL's/ Vulkan's triangle
@@ -75,6 +76,8 @@ int main(int argc, char** argv) {
     float b = 0.0f;
     float slope = 0.05f;
 
+    auto eventSystem = new EventSystem(window);
+    eventSystem->setup();
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
@@ -95,9 +98,10 @@ int main(int argc, char** argv) {
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
 
-        /* Poll for and process events */
-        glfwPollEvents();
+        eventSystem->proces();
     }
+
+
 
     glfwTerminate();
     return 0;

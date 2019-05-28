@@ -35,11 +35,10 @@ std::vector<TriangleStl *> * ParserStl::parseAscii() {
             delete token;
             token = lexer->getNextString();
             if( strcmp(token, "normal") == 0){
-//TODO Get 3 chars and convert them to
+//TODO Get 3 chars and convert them to vertexes
 //TODO Get 2 chars and compare them to outer loop
 //TODO load vertex 3 times
 //TODO check if triangle is ended correctly
-
             }
         }
     }
