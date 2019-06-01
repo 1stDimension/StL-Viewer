@@ -21,8 +21,9 @@ GLfloat left = -2.0f;
 GLfloat right = 2.0f;
 
 GLfloat scale = 1.0f;
-GLfloat rotateX = 0.0f;
-GLfloat rotateY = 0.0f;
+
+GLfloat rotateX = 0.52532198881;
+GLfloat rotateY = 0.52532198881f;
 
 GLfloat translateX = 0.0f;
 GLfloat translateY = 0.0f;
@@ -59,7 +60,7 @@ int main(int argc, char **argv) {
     if (!glfwInit())
         return -1;
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(900, 900, "Hello World", nullptr, nullptr);
+    window = glfwCreateWindow(600, 600, "Hello World", nullptr, nullptr);
     if (!window) {
         glfwTerminate();
         return -1;

@@ -1,6 +1,7 @@
 #include <glad/glad.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include "Renderer.h"
+#include "ShaderHandler.h"
 #include "Loader.h"
 
 Renderer::Renderer() {

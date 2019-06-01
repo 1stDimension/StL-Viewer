@@ -22,8 +22,10 @@ set(EXECUTABLE_OUTPUT_PATH ./test_bin)
 
 aux_source_directory(../src SOURCE)
 list(REMOVE_ITEM SOURCE "../src/main.cpp")
-list(REMOVE_ITEM SOURCE "../src/ShaderHandler.cpp")#TODO figure out why it doesn't work
+#list(REMOVE_ITEM SOURCE "../src/ShaderHandler.cpp")#TODO figure out why it doesn't work
 #TODO somehow add glad to libs included in tests
 #TODO consider creating a lib from files in src
 aux_source_directory(. TEST_SOURCE)
 add_executable(${EXECUTBLE_TEST} ${TEST_SOURCE} ${SOURCE})
+target_link_libraries(${EXECUTBLE_TEST}  glfw)
+target_link_libraries(${EXECUTBLE_TEST}  glad)

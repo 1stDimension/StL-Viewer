@@ -1,5 +1,5 @@
-#include "ShaderHandler.h"
 #include <glad/glad.h>
+#include "ShaderHandler.h"
 #include <iostream>
 
 unsigned int ShaderHandler::getId() const {
