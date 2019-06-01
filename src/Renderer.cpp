@@ -36,3 +36,11 @@ void Renderer::shaderSetUP() {
     shaderHandler.buildShader();
     glUseProgram(shaderHandler.getId());
 }
+
+void Renderer::resize(int width, int height) {
+    if (width < height) //TODO check for posible leaks
+        projection = glm::ortho(left, right, bottom * height / width, top * height / width, nearer, farer);
+    else
+        projection = glm::ortho(left * width / height, right * width / height, bottom, top, nearer, farer);
+
+}
