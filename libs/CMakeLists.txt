@@ -1,3 +1,4 @@
+#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ../lib)
 #Adding glad
 ADD_LIBRARY( glad STATIC ./glad/src/glad.c )
 

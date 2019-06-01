@@ -3,10 +3,10 @@
 
 //all pointers need to point to a 3 element array
 TriangleStl::TriangleStl(float* dir, float* one, float* two, float* tree) {
-    memcpy(data    , dir,  3);
-    memcpy(data + 3, one,  3);
-    memcpy(data + 6, two,  3);
-    memcpy(data + 9, tree, 3);
+    memcpy(data    , dir,  3 * sizeof(*dir));
+    memcpy(data + 3, one,  3 * sizeof(*one));
+    memcpy(data + 6, two,  3 * sizeof(*two));
+    memcpy(data + 9, tree, 3 * sizeof(*tree));
 }
 
 TriangleStl::~TriangleStl() = default;
