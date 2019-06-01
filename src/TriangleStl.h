@@ -4,15 +4,18 @@
 
 class TriangleStl {
 private:
-    std::tuple<float, float, float> direction;
-    std::tuple<float, float, float> vertexOne;
-    std::tuple<float, float, float> vertexTwo;
-    std::tuple<float, float, float> vertexTree;
+    mutable float data[12];
+//  0 - 2   direction;
+//  3 - 5   vertexOne;
+//  6 - 8   vertexTwo;
+//  9 - 11  vertexTree;
 public:
-    const std::tuple<float, float, float> &getDirection() const;
-    const std::tuple<float, float, float> &getVertexOne() const;
-    const std::tuple<float, float, float> &getVertexTwo() const;
-    const std::tuple<float, float, float> &getVertexTree() const;
+
+    float* getDirection() const;
+    float* getVertexOne() const;
+    float* getVertexTwo() const;
+    float* getVertexTree() const;
+    float* getAll() const;
 
 public:
     //each must contain 3 values
