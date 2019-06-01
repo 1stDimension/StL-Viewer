@@ -7,7 +7,7 @@ if (APPLE)
     add_definitions(-D__GLIBCXX__)
 endif (APPLE)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(EXECUTABLE_NAME stlViewer)
 set(LIBS_DIR ${${PROJECT_NAME}_SOURCE_DIR}/libs)
 set(EXECUTABLR_TESTS Test${PROJECT_NAME})
