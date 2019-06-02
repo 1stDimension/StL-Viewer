@@ -8,19 +8,18 @@ void EventSystem::proces() {
     glfwPollEvents();
 }
 
-void mouseButtonEvents(GLFWwindow *window, int button, int action, int mods) {
+void EventSystem::mouseButtonEvents(GLFWwindow *window, int button, int action, int mods) {
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
         std::cout << "\t" "GLFW_MOUSE_BUTTON_LEFT + GLFW_PRESS" << std::endl;
     }
 }
 
-void keyEvents(GLFWwindow *window, int key, int scancode, int action, int mods) {
+void EventSystem::keyEvents(GLFWwindow *window, int key, int scancode, int action, int mods) {
     if ((key == GLFW_KEY_LEFT_SHIFT || key == GLFW_KEY_RIGHT_SHIFT) && (action == GLFW_PRESS))
         std::cout << "\t" "Shift" << std::endl;
 }
 
 void EventSystem::setup() {
-//    keyFunctions[0]  = keyEvents;
     glfwSetKeyCallback(this->wwindow, keyEvents);
     glfwSetMouseButtonCallback(this->wwindow, mouseButtonEvents);
 }
