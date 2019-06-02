@@ -14,8 +14,9 @@ std::tuple<char *, uint64_t> Loader::loadFile(const char * name) {
     //Read size
     uint64_t size = buffer->pubseekoff(0,input.end, input.in);
     buffer->pubseekpos(0, input.in);
-    char* loaded = new char[size];
+    char* loaded = new char[size+1];
     buffer->sgetn(loaded, size);
     input.close();
+    loaded[size] = 0;
     return std::make_tuple( loaded , size);
 }

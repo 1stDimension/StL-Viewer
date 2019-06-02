@@ -14,13 +14,18 @@
 //TODO Check if file is an stl file If it's nor throw an exception
 //TODO Write translation unit from TriangleStl to OpenGL's/ Vulkan's triangle
 
-glm::mat4x4 projectionMatrix;// = glm::mat4x4(1.0f);
-glm::mat4x4 modelViewMatrix;// = glm::mat4x4(1.0f);
-
 GLfloat left = -2.0f;
-GLfloat right = 2.0f;
 
+GLfloat right = 2.0f;
+GLfloat bottom = -2.0f;
+GLfloat top = 2.0f;
+GLfloat nearer = -2.0f;
+GLfloat farer = 2.0f;
 GLfloat scale = 1.0f;
+
+
+glm::mat4x4 projectionMatrix = glm::ortho(left, right, bottom, top, nearer, farer);//
+glm::mat4x4 modelViewMatrix;//
 
 GLfloat rotateX = 0.52532198881;
 GLfloat rotateY = 0.52532198881f;
@@ -28,16 +33,15 @@ GLfloat rotateY = 0.52532198881f;
 GLfloat translateX = 0.0f;
 GLfloat translateY = 0.0f;
 
-GLfloat bottom = -2.0f;
-GLfloat top = 2.0f;
-GLfloat nearer = -2.0f;
-GLfloat farer = 2.0f;
-
 static void window_size_callback(GLFWwindow *window, int width, int height) {
-    if (width < height)
+
+    glViewport( 0,0, width, height);
+    if (width < height && width > 0)
         projectionMatrix = glm::ortho(left, right, bottom * height / width, top * height / width, nearer, farer);
-    else
+    else if (width >= height && height > 0)
         projectionMatrix = glm::ortho(left * width / height, right * width / height, bottom, top, nearer, farer);
+    else
+        projectionMatrix = glm::ortho(left, right, bottom, top, nearer, farer);
 }
 
 int main(int argc, char **argv) {
@@ -49,6 +53,7 @@ int main(int argc, char **argv) {
     try {
         loadedData = Loader::loadFile(argv[1]);
     }
+    //TODO refactor
     catch (std::exception &e) {
         std::cout << e.what() << std::endl;
         return 2;
@@ -86,11 +91,25 @@ int main(int argc, char **argv) {
             -1.0f, 1.0f, 1.0f,
             -1.0f, -1.0f, 1.0f,
             1.0f, -1.0f, 1.0f,
-
             1.0f, 1.0f, -1.0f,
             -1.0f, 1.0f, -1.0f,
             -1.0f, -1.0f, -1.0f,
             1.0f, -1.0f, -1.0f
+    };
+
+    GLuint indices[] = {
+            5, 1,
+            1, 0,
+            0, 4,
+            4, 5,
+            2, 3,
+            3, 0,
+            1, 2,
+            7, 4,
+            3, 7,
+            2, 6,
+            6, 7,
+            5, 6
     };
 
     unsigned int vertices;
@@ -98,7 +117,12 @@ int main(int argc, char **argv) {
     glBindBuffer(GL_ARRAY_BUFFER, vertices);
     glBufferData(GL_ARRAY_BUFFER, sizeof(example), example, GL_STATIC_DRAW);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 2, GL_FLOAT, false, 2 * sizeof(float), 0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, false, 3 * sizeof(float), 0);
+
+    unsigned int indexBuffer;
+    glGenBuffers(1, &indexBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     ShaderHandler shaderHandler;
     std::tuple<char *, uint64_t> vertexShader = Loader::loadFile("../shaders/Vertex_HelloWorld.glsl");
@@ -135,8 +159,8 @@ int main(int argc, char **argv) {
 
         b += slope;
 //        Change to triangles
-        glDrawArrays(GL_LINES, 0, 24); // Draw coll
-
+//        glDrawArrays(GL_LINES, 0, 12); // Draw coll
+        glDrawElements( GL_LINES, 12 * 2, GL_UNSIGNED_INT, NULL );
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
 

@@ -9,8 +9,6 @@ class EventSystem {
     static void keyEvents(GLFWwindow* window, int key, int scancode, int action, int mods);
     static void mouseButtonEvents(GLFWwindow *window, int button, int action, int mods);
 //    TODO Consider adding multi threading
-//    friend void mouseButtonEvents(GLFWwindow *window, int button, int action, int mods);
-//    friend void keyEvents(GLFWwindow *window, int key, int scancode, int action, int mods);
 public:
     explicit EventSystem(GLFWwindow *wwindow);
 

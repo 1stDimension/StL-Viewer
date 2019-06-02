@@ -22,4 +22,5 @@ void EventSystem::keyEvents(GLFWwindow *window, int key, int scancode, int actio
 void EventSystem::setup() {
     glfwSetKeyCallback(this->wwindow, keyEvents);
     glfwSetMouseButtonCallback(this->wwindow, mouseButtonEvents);
+//    glfwSetWindowSizeCallback(wwindow, window_size_callback);
 }
