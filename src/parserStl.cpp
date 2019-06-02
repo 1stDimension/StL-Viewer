@@ -58,7 +58,7 @@ std::vector<TriangleStl *> *ParserStl::parseAscii() {
                                     delete vertices[j];
                                 goto ending; //I KNOW IT'S BAD
                                 //BUT ONLY ALTERNATIVE IS TO RISE AN EXCEPTION
-                                //THAT
+                                //THIS COULD WORK IF I WOULD REPLACE RAW POINTERS TO SMART ONES
                             }
                             delete [] token;
                             token = lexer->getNextString();
