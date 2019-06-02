@@ -159,7 +159,6 @@ int main(int argc, char **argv) {
 
         b += slope;
 //        Change to triangles
-//        glDrawArrays(GL_LINES, 0, 12); // Draw coll
         glDrawElements( GL_LINES, 12 * 2, GL_UNSIGNED_INT, NULL );
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
