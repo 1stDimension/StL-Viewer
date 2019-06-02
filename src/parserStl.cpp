@@ -30,11 +30,11 @@ std::vector<TriangleStl *> *ParserStl::parseAscii() {
 
     char *token;
     token = lexer->getNextString(); // we got name
-
+    delete [] token;
     float* direction;
     float** vertices = new float*[3];
-
     while (token != nullptr) {
+        token = lexer->getNextString();
         if (strcmp(token, "facet") == 0) {
             delete[] token;
             token = lexer->getNextString();
@@ -51,6 +51,14 @@ std::vector<TriangleStl *> *ParserStl::parseAscii() {
                         for (uint8_t i = 0; i < 3; i++) {
                             if (strcmp(token, "vertex") == 0) {
                                 vertices[i] = parseCordinates();
+                            } else {
+                                delete token;
+                                delete  [] direction;
+                                for(uint8_t j = 0; j <=i; j++)
+                                    delete vertices[j];
+                                goto ending; //I KNOW IT'S BAD
+                                //BUT ONLY ALTERNATIVE IS TO RISE AN EXCEPTION
+                                //THAT
                             }
                             delete [] token;
                             token = lexer->getNextString();
@@ -62,16 +70,41 @@ std::vector<TriangleStl *> *ParserStl::parseAscii() {
                                 delete token;
                                 output->push_back(new TriangleStl(direction, vertices[0], vertices[1], vertices[2]));
                             }
+                        } else{
+                            delete [] token;
+                            delete  [] direction;
+                            delete [] vertices[0];
+                            delete [] vertices[1];
+                            delete [] vertices[2];
+                            break;
                         }
+                    } else {
+                        delete [] token;
+                        delete  [] direction;
+                        break;
                     }
+                } else {
+                    delete [] token;
+                    delete  [] direction;
+                    break;
                 }
 //TODO check if triangle is ended correctly
+            } else {
+                delete[] token;
+                break;
             }
+        }  else {
+            delete [] token;
+            break;
         }
     }
 //    TODO check if file end with endsolid
-
+ending:
     cleanUp();
+    if(output->empty()) {
+        delete output;
+        return nullptr;
+    }
     return output;
 }
 
@@ -82,7 +115,7 @@ float *ParserStl::parseCordinates() {
         token = lexer->getNextString();
         char *end;
         verteces[j] = strtof(token, &end);
-        if (end == (token + strlen(token))) {
+        if (end != (token + strlen(token))) {
             std::cout << "Error" << token << "Could not be converted to numer"
                       << std::endl;// rise an error
                       delete[] verteces;

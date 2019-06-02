@@ -30,6 +30,10 @@ public:
     void rotateX(float rotation);
     void rotateY(float rotation);
     void rotateZ(float rotation);
+    void scaleX(float scaleX);
+    void scaleY(float scaleY);
+    void scaleZ(float scaleZ);
+    void scalea(float scale);
     void resize(int width, int height);
     void draw();
     void draw(float* data, int NumElements);
