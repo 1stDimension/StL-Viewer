@@ -11,6 +11,8 @@ class ParserStl {
 
     void cleanUp();
 
+    float* parseCordinates();
+
     std::vector<TriangleStl *> * parseBin();
 
     std::vector<TriangleStl *> * parseAscii();
