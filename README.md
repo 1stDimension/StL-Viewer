@@ -1,5 +1,5 @@
 # StL-Viewer
-Project to make a viewer for StL files using OpenGL and Vulkan
+It is being developed on Windows 10 using MinGW, with goal of being OS and compiler independant. However it was not yet tested on any machine with different OS nor compied using different compiler. 
 
 Dependencies:
 * [GLFW][1]
