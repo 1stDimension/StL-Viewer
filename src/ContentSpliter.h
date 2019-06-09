@@ -5,12 +5,11 @@
 #include <vector>
 
 class ContentSpliter {
-    std::vector<TriangleStl*>* rawData;
-    float** batchedData;
-    uint32_t batchingFactor;
+    float* data;
+    uint32_t size;
     Leyout* leyout;
 public:
-    explicit ContentSpliter(std::vector<TriangleStl *> *rawData);
+    explicit ContentSpliter(std::vector<TriangleStl *> *vector);
     Leyout* getLeyout();
     float* getNextChunk();
     //TODO consider replacing it with template
