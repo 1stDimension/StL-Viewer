@@ -12,38 +12,6 @@
 #include <glm/gtc/type_ptr.hpp>
 
 //TODO Check if file is an stl file If it's nor throw an exception
-//TODO Write translation unit from TriangleStl to OpenGL's/ Vulkan's triangle
-
-GLfloat left = -2.0f;
-
-GLfloat right = 2.0f;
-GLfloat bottom = -2.0f;
-GLfloat top = 2.0f;
-GLfloat nearer = -2.0f;
-GLfloat farer = 2.0f;
-GLfloat scale = 1.0f;
-
-
-glm::mat4x4 projectionMatrix = glm::ortho(left, right, bottom, top, nearer, farer);//
-glm::mat4x4 modelViewMatrix;//
-
-GLfloat rotateX = 0.52532198881;
-GLfloat rotateY = 0.52532198881f;
-
-GLfloat translateX = 0.0f;
-GLfloat translateY = 0.0f;
-
-static void window_size_callback(GLFWwindow *window, int width, int height) {
-
-    glViewport( 0,0, width, height);
-    if (width < height && width > 0)
-        projectionMatrix = glm::ortho(left, right, bottom * height / width, top * height / width, nearer, farer);
-    else if (width >= height && height > 0)
-        projectionMatrix = glm::ortho(left * width / height, right * width / height, bottom, top, nearer, farer);
-    else
-        projectionMatrix = glm::ortho(left, right, bottom, top, nearer, farer);
-}
-
 int main(int argc, char **argv) {
     if (argc <= 1) {
         std::cout << "Too few arguments" << std::endl;
@@ -70,103 +38,23 @@ int main(int argc, char **argv) {
         glfwTerminate();
         return -1;
     }
-    /*TODO DELETE*/
-    modelViewMatrix = glm::mat4x4(1.0);
-    modelViewMatrix = glm::scale(modelViewMatrix, glm::vec3(scale, scale, scale));
-    modelViewMatrix = glm::translate(modelViewMatrix, glm::vec3(translateX, translateY, 0.0f));
-
-    modelViewMatrix = glm::rotate(modelViewMatrix, rotateX, glm::vec3(1.0f, 0.0f, 0.0f));
-    modelViewMatrix = glm::rotate(modelViewMatrix, rotateY, glm::vec3(0.0f, 1.0f, 0.0f));
-    /*TODO DELETE*/
-
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
 
     /* Use Glad for modern openGL*/
     int status = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
-
-    float example[] = {
-            1.0f, 1.0f, 1.0f,
-            -1.0f, 1.0f, 1.0f,
-            -1.0f, -1.0f, 1.0f,
-            1.0f, -1.0f, 1.0f,
-            1.0f, 1.0f, -1.0f,
-            -1.0f, 1.0f, -1.0f,
-            -1.0f, -1.0f, -1.0f,
-            1.0f, -1.0f, -1.0f
-    };
-
-    GLuint indices[] = {
-            5, 1,
-            1, 0,
-            0, 4,
-            4, 5,
-            2, 3,
-            3, 0,
-            1, 2,
-            7, 4,
-            3, 7,
-            2, 6,
-            6, 7,
-            5, 6
-    };
-
-    unsigned int vertices;
-    glGenBuffers(1, &vertices);
-    glBindBuffer(GL_ARRAY_BUFFER, vertices);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(example), example, GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, false, 3 * sizeof(float), 0);
-
-    unsigned int indexBuffer;
-    glGenBuffers(1, &indexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-    ShaderHandler shaderHandler;
-    std::tuple<char *, uint64_t> vertexShader = Loader::loadFile("../shaders/Vertex_HelloWorld.glsl");
-    shaderHandler.addShader(GL_VERTEX_SHADER, std::get<0>(vertexShader));
-
-    std::tuple<char *, uint64_t> fragmentShader = Loader::loadFile("../shaders/Fragment_HelloWorld.glsl");
-    shaderHandler.addShader(GL_FRAGMENT_SHADER, std::get<0>(fragmentShader));
-    shaderHandler.buildShader();
-    glUseProgram(shaderHandler.getId());
-
-    int location_u_Color = glGetUniformLocation(shaderHandler.getId(), "u_Color");
-    int location_u_M_V_P = glGetUniformLocation(shaderHandler.getId(), "u_M_V_P");
-
-    float b = 0.0f;
-    float slope = 0.05f;
-
     auto eventSystem = new EventSystem(window);
-    glfwSetWindowSizeCallback(window, window_size_callback);
-    eventSystem->setup();
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window)) {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
 
-        if (location_u_Color != -1)
-            glUniform4f(location_u_Color, 1.0f, 1.0f, b, 1.0f);
-        glm::mat4x4 mvp = projectionMatrix * modelViewMatrix;
-        if (location_u_M_V_P != -1)
-            glUniformMatrix4fv(location_u_M_V_P, 1, GL_FALSE, glm::value_ptr(mvp));
-        if (b > 1.0f)
-            slope *= -1;
-        else if (b < 0.0f)
-            slope *= -1;
-
-        b += slope;
-//        Change to triangles
-        glDrawElements( GL_LINES, 12 * 2, GL_UNSIGNED_INT, NULL );
-        /* Swap front and back buffers */
+       /* Swap front and back buffers */
         glfwSwapBuffers(window);
 
         eventSystem->proces();
     }
-
-
     glfwTerminate();
     return 0;
 }

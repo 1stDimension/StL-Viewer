@@ -10,10 +10,10 @@ class EventSystem {
     static void mouseButtonEvents(GLFWwindow *window, int button, int action, int mods);
     static void window_size_callback(GLFWwindow *window, int width, int height);
 //    TODO Consider adding multi threading
-public:
-    explicit EventSystem(GLFWwindow *wwindow);
-
     void setup(); //TODO consider throwing exceptions or returning error codes
+public:
+
+    explicit EventSystem(GLFWwindow *wwindow);
     void proces();
 };
 

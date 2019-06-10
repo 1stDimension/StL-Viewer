@@ -2,7 +2,9 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
-EventSystem::EventSystem(GLFWwindow *wwindow) : wwindow(wwindow) {}
+EventSystem::EventSystem(GLFWwindow *wwindow) : wwindow(wwindow) {
+    this->setup();
+}
 
 void EventSystem::proces() {
     glfwPollEvents();
