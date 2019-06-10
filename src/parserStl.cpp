@@ -26,8 +26,8 @@ std::vector<TriangleStl *> *ParserStl::parseFile() {
 //TODO Check if keywords are strictly correct
 std::vector<TriangleStl *> *ParserStl::parseAscii() {
 //    TODO consider changing initial size
-    auto output = new std::vector<TriangleStl *>(20);
-
+    auto output = new std::vector<TriangleStl *>();
+    output->reserve(20);
     char *token;
     token = lexer->getNextString(); // we got name
     delete [] token;
@@ -41,6 +41,7 @@ std::vector<TriangleStl *> *ParserStl::parseAscii() {
             if (strcmp(token, "normal") == 0) {
                 delete[] token;
                 direction = parseCordinates();
+                //TODO error checking if coordinates vere not parsed correctly
                 token = lexer->getNextString();
                 if (strcmp(token, "outer") == 0) {
                     delete[] token;
@@ -50,7 +51,7 @@ std::vector<TriangleStl *> *ParserStl::parseAscii() {
                         token = lexer->getNextString();
                         for (uint8_t i = 0; i < 3; i++) {
                             if (strcmp(token, "vertex") == 0) {
-                                vertices[i] = parseCordinates();
+                                vertices[i] = parseCordinates();//TODO add errorchecking
                             } else {
                                 delete token;
                                 delete  [] direction;
@@ -67,7 +68,6 @@ std::vector<TriangleStl *> *ParserStl::parseAscii() {
                             delete [] token;
                             token = lexer->getNextString();
                             if (strcmp(token, "endfacet") == 0){
-                                delete token;
                                 output->push_back(new TriangleStl(direction, vertices[0], vertices[1], vertices[2]));
                             }
                         } else{

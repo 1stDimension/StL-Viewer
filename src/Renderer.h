@@ -1,6 +1,6 @@
 #pragma once
 
-
+#include "ContentSplitter.h"
 #include <glm/mat4x4.hpp>
 #include "ShaderHandler.h"
 
@@ -15,28 +15,35 @@ class Renderer {
 
     float scale = 1.0f;
 
+    unsigned int vertices;//TODO add index buffer support
+    unsigned int indices;
+    unsigned int vao;
+    ContentSplitter* contentSplitter;
+
     glm::mat4x4 projection;
     glm::mat4x4 view;
     glm::mat4x4 model;
 
+    int32_t u_M_V_P_location;
     ShaderHandler shaderHandler;
 
-public:
-    Renderer();
-
     void shaderSetUP();
+public:
+
+    Renderer(ContentSplitter* contentSplitter);
 
     void move(float x, float y, float z);
     void rotateX(float rotation);
     void rotateY(float rotation);
     void rotateZ(float rotation);
+    void rotate( float X, float Y, float Z);
     void scaleX(float scaleX);
     void scaleY(float scaleY);
     void scaleZ(float scaleZ);
-    void scalea(float scale);
+    void scaleAll(float scale);
     void resize(int width, int height);
     void draw();
-    void draw(float* data, int NumElements);
+//    void draw(float* data, int NumElements);
 };
 
 

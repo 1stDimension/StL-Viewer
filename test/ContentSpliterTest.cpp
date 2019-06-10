@@ -1,6 +1,6 @@
 #include <Catch/catch.hpp>
 #include <ParserStl.h>
-#include "ContentSpliter.h"
+#include "ContentSplitter.h"
 
 TEST_CASE("Check if data is converted correctly", "[ContentSplitter]"){
     // Code from project START
@@ -8,6 +8,6 @@ TEST_CASE("Check if data is converted correctly", "[ContentSplitter]"){
     auto parser = new ParserStl(pIfstream);
     auto triangles = parser->parseFile();
     // Code from project END
-    auto contentSpliter = ContentSpliter(triangles);
+    auto contentSpliter = ContentSplitter(triangles);
 
 }

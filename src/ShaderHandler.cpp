@@ -38,4 +38,8 @@ void ShaderHandler::buildShader() {
     glValidateProgram(this->id);
 }
 
+int32_t ShaderHandler::getUniformLocation(const char *name) {
+    return glGetUniformLocation(this->id, name);
+}
+
 ShaderHandler::~ShaderHandler() = default;
