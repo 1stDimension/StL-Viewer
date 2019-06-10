@@ -18,6 +18,7 @@ include_directories(src)
 
 include_directories(${LIBS_DIR}/glfw/include)
 include_directories( ${LIBS_DIR}/glad/include)
+include_directories( ${LIBS_DIR}/yaml-cpp/include)
 include_directories(${LIBS_DIR}/glm/)
 #include_directories( ${LIBS_DIR}/libs/glad/include)
 

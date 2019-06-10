@@ -4,8 +4,28 @@
 #include "Renderer.h"
 
 
+EventSystem::EventSystem(GLFWwindow *wwindow) {
+    this->wwindow = wwindow;
+    this->setup();
+}
+
+void EventSystem::setup() {
+    glfwSetKeyCallback(this->wwindow, keyEvents);
+    glfwSetMouseButtonCallback(this->wwindow, mouseButtonEvents);
+    glfwSetWindowSizeCallback(this->wwindow, window_size_callback);
+    glfwSetScrollCallback(this->wwindow, scrollEvents);
+}
+
+void EventSystem::setRenderer(Renderer *renderer1) {
+    renderer = renderer1;
+}
+
 void EventSystem::process() {
     glfwPollEvents();
+}
+
+void EventSystem::scrollEvents(GLFWwindow* window, double xoffset, double yoffset){
+
 }
 
 void EventSystem::mouseButtonEvents(GLFWwindow *window, int button, int action, int mods) {
@@ -36,21 +56,6 @@ void EventSystem::keyEvents(GLFWwindow *window, int key, int scancode, int actio
     }
 }
 
-void EventSystem::setup() {
-    glfwSetKeyCallback(this->wwindow, keyEvents);
-    glfwSetMouseButtonCallback(this->wwindow, mouseButtonEvents);
-    glfwSetWindowSizeCallback(this->wwindow, window_size_callback);
-}
-
 void EventSystem::window_size_callback(GLFWwindow *window, int width, int height) {
     renderer->resize(width, height);
-}
-
-EventSystem::EventSystem(GLFWwindow *wwindow) {
-    this->wwindow = wwindow;
-    this->setup();
-}
-
-void EventSystem::setRenderer(Renderer *renderer1) {
-    renderer = renderer1;
 }

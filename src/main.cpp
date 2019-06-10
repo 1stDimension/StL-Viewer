@@ -7,9 +7,10 @@
 #include "Renderer.h"
 #include "ContentSplitter.h"
 
-#include "glm/glm.hpp"
+#include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <yaml-cpp/yaml.h>
 
 //TODO Check if file is an stl file If it's nor throw an exception
 int main(int argc, char **argv) {
@@ -17,6 +18,9 @@ int main(int argc, char **argv) {
         std::cout << "Too few arguments" << std::endl;
         return 1;
     }
+
+    YAML::Node config = YAML::LoadFile("config.yaml");
+
     auto dataInput = new std::ifstream(argv[1], std::ifstream::in | std::ifstream::binary);
     auto parser = new ParserStl(dataInput);
     auto triangles = parser->parseFile();
