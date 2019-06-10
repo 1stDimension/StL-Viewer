@@ -83,3 +83,7 @@ void Renderer::draw() {
 //    contentSplitter->getNumVertices()
 
 }
+
+void Renderer::scaleAll(float scale) {
+
+}

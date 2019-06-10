@@ -39,9 +39,10 @@ int main(int argc, char **argv) {
     /* Use Glad for modern openGL*/
     int status = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
 
-    Renderer* renderer = new Renderer(contentSplitter);
+    auto renderer = new Renderer(contentSplitter);
 
-    auto eventSystem = new EventSystem(window, Renderer(nullptr));
+    EventSystem::setRenderer(renderer);
+    auto eventSystem = new EventSystem(window);
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window)) {
         /* Render here */

@@ -1,11 +1,10 @@
 #pragma once
 
-
 #include <GLFW/glfw3.h>
 #include "Renderer.h"
 
 class EventSystem {
-    static Renderer* renderer = nullptr;
+    inline static Renderer* renderer;
     GLFWwindow* wwindow;
 //TODO
     static void keyEvents(GLFWwindow* window, int key, int scancode, int action, int mods);
@@ -14,8 +13,8 @@ class EventSystem {
 //    TODO Consider adding multi threading
     void setup(); //TODO consider throwing exceptions or returning error codes
 public:
-
-    explicit EventSystem(GLFWwindow *wwindow, Renderer* renderer);
+    static void setRenderer(Renderer* renderer1);
+    explicit EventSystem(GLFWwindow *wwindow);
     void process();
 };
 
