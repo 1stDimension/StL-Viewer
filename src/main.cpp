@@ -53,7 +53,7 @@ int main(int argc, char **argv) {
        /* Swap front and back buffers */
         glfwSwapBuffers(window);
 
-        eventSystem->proces();
+        eventSystem->process();
     }
     glfwTerminate();
     return 0;

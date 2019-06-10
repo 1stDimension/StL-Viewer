@@ -6,7 +6,7 @@ EventSystem::EventSystem(GLFWwindow *wwindow) : wwindow(wwindow) {
     this->setup();
 }
 
-void EventSystem::proces() {
+void EventSystem::process() {
     glfwPollEvents();
 }
 

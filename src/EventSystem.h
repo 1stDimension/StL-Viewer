@@ -14,7 +14,7 @@ class EventSystem {
 public:
 
     explicit EventSystem(GLFWwindow *wwindow);
-    void proces();
+    void process();
 };
 
 
