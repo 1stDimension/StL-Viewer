@@ -1,10 +1,8 @@
 #include "EventSystem.h"
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include "Renderer.h"
 
-EventSystem::EventSystem(GLFWwindow *wwindow) : wwindow(wwindow) {
-    this->setup();
-}
 
 void EventSystem::process() {
     glfwPollEvents();
@@ -24,5 +22,14 @@ void EventSystem::keyEvents(GLFWwindow *window, int key, int scancode, int actio
 void EventSystem::setup() {
     glfwSetKeyCallback(this->wwindow, keyEvents);
     glfwSetMouseButtonCallback(this->wwindow, mouseButtonEvents);
-//    glfwSetWindowSizeCallback(wwindow, window_size_callback);
+    glfwSetWindowSizeCallback(this->wwindow, window_size_callback);
+}
+
+void EventSystem::window_size_callback(GLFWwindow *window, int width, int height) {
+    renderer->resize( width, height);
+}
+
+EventSystem::EventSystem(GLFWwindow *wwindow, Renderer *renderer) {
+    this->wwindow = wwindow;
+    renderer = renderer;
 }

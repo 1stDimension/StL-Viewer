@@ -3,9 +3,9 @@
 #include <iostream>
 #include "TriangleStl.h"
 #include "ParserStl.h"
-#include "Loader.h"
-#include "ShaderHandler.h"
 #include "EventSystem.h"
+#include "Renderer.h"
+#include "ContentSplitter.h"
 
 #include "glm/glm.hpp"
 #include <glm/gtc/matrix_transform.hpp>
@@ -17,16 +17,10 @@ int main(int argc, char **argv) {
         std::cout << "Too few arguments" << std::endl;
         return 1;
     }
-    std::tuple<char *, uint64_t> loadedData;
-    try {
-        loadedData = Loader::loadFile(argv[1]);
-    }
-    //TODO refactor
-    catch (std::exception &e) {
-        std::cout << e.what() << std::endl;
-        return 2;
-    }
-
+    auto dataInput = new std::ifstream(argv[1], std::ifstream::in | std::ifstream::binary);
+    auto parser = new ParserStl(dataInput);
+    auto triangles = parser->parseFile();
+    auto contentSplitter = new ContentSplitter(triangles);
     GLFWwindow *window;
 
     /* Initialize the library */
@@ -44,16 +38,21 @@ int main(int argc, char **argv) {
 
     /* Use Glad for modern openGL*/
     int status = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
-    auto eventSystem = new EventSystem(window);
+
+    Renderer* renderer = new Renderer(contentSplitter);
+
+    auto eventSystem = new EventSystem(window, Renderer(nullptr));
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window)) {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
 
        /* Swap front and back buffers */
-        glfwSwapBuffers(window);
 
+        renderer->draw();
         eventSystem->process();
+
+        glfwSwapBuffers(window);
     }
     glfwTerminate();
     return 0;

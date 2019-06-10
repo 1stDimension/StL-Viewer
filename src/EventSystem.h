@@ -2,8 +2,10 @@
 
 
 #include <GLFW/glfw3.h>
+#include "Renderer.h"
 
 class EventSystem {
+    static Renderer* renderer = nullptr;
     GLFWwindow* wwindow;
 //TODO
     static void keyEvents(GLFWwindow* window, int key, int scancode, int action, int mods);
@@ -13,7 +15,7 @@ class EventSystem {
     void setup(); //TODO consider throwing exceptions or returning error codes
 public:
 
-    explicit EventSystem(GLFWwindow *wwindow);
+    explicit EventSystem(GLFWwindow *wwindow, Renderer* renderer);
     void process();
 };
 

@@ -7,7 +7,8 @@ ContentSplitter::ContentSplitter(std::vector<TriangleStl *> *vector){
     const char verticesSize = triangleSize - normalsSize;// -3 because normals
     this->vertices = new float [vector->size() * verticesSize];
     this->normals = new float [vector->size()];
-    this->size = vector->size() * triangleSize;
+    this->NumVertices = vector->size() * 3;
+    this->NumNormals  = vector->size();
     { uint32_t i = 0;
         for (auto &var : *vector) {
             memcpy(this->vertices + i * verticesSize, var->getAll() + normalsSize,
@@ -23,10 +24,14 @@ float *ContentSplitter::getVertices() const {
     return vertices;
 }
 
+uint32_t ContentSplitter::getNumVertices() const {
+    return NumVertices;
+}
+
 float *ContentSplitter::getNormals() const {
     return normals;
 }
 
-uint32_t ContentSplitter::getSize() const {
-    return size;
+uint32_t ContentSplitter::getNumNormals() const {
+    return NumNormals;
 }

@@ -25,8 +25,9 @@ class Renderer {
     glm::mat4x4 model;
 
     int32_t u_M_V_P_location;
-    ShaderHandler shaderHandler;
+    int32_t u_Colour_location;
 
+    ShaderHandler shaderHandler;
     void shaderSetUP();
 public:
 
