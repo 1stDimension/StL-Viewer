@@ -1,2 +1,11 @@
-projection : "orthographic" # or perspective
-fov : 35.0f #Relevant only if projection is perspective
+projection :
+  type : "orthographic" # or perspective
+  fov : 35.0 #Relevant only if projection is perspective
+primitive: "triangle"
+clipping:
+  left:  -2.0
+  right:  2.0
+  bottom: 2.0
+  top:    2.0
+  near:  -2.0
+  far:    2.0

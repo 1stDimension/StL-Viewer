@@ -20,6 +20,7 @@ int main(int argc, char **argv) {
     }
 
     YAML::Node config = YAML::LoadFile("config.yaml");
+    std::cout << "Last logged in: " << config["lastLogin"]<<std::endl;
 
     auto dataInput = new std::ifstream(argv[1], std::ifstream::in | std::ifstream::binary);
     auto parser = new ParserStl(dataInput);
