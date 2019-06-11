@@ -20,7 +20,6 @@ include_directories(${LIBS_DIR}/glfw/include)
 include_directories( ${LIBS_DIR}/glad/include)
 include_directories( ${LIBS_DIR}/yaml-cpp/include)
 include_directories(${LIBS_DIR}/glm/)
-#include_directories( ${LIBS_DIR}/libs/glad/include)
 
 link_directories(${CMAKE_SOURCE_DIR}/lib)
 
@@ -29,6 +28,7 @@ add_subdirectory(libs)
 
 target_link_libraries(${EXECUTABLE_NAME}  glfw)
 target_link_libraries(${EXECUTABLE_NAME}  glad)
+target_link_libraries(${EXECUTABLE_NAME}  yaml-cpp)
 
 #aux_source_directory(./src SOURCE)
 #add_library(Project_AS_LIB  ${SOURCE})

@@ -6,11 +6,7 @@
 #include "EventSystem.h"
 #include "Renderer.h"
 #include "ContentSplitter.h"
-
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <yaml-cpp/yaml.h>
+#include "Configuration.h"
 
 //TODO Check if file is an stl file If it's nor throw an exception
 int main(int argc, char **argv) {
@@ -18,10 +14,7 @@ int main(int argc, char **argv) {
         std::cout << "Too few arguments" << std::endl;
         return 1;
     }
-
-    YAML::Node config = YAML::LoadFile("config.yaml");
-    std::cout << "Last logged in: " << config["lastLogin"]<<std::endl;
-
+    Configuration* configuration = new Configuration("config.yml");
     auto dataInput = new std::ifstream(argv[1], std::ifstream::in | std::ifstream::binary);
     auto parser = new ParserStl(dataInput);
     auto triangles = parser->parseFile();
@@ -48,17 +41,14 @@ int main(int argc, char **argv) {
 
     EventSystem::setRenderer(renderer);
     auto eventSystem = new EventSystem(window);
-    /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window)) {
-        /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
-
-       /* Swap front and back buffers */
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         renderer->draw();
+        glfwSwapBuffers(window);
+
         eventSystem->process();
 
-        glfwSwapBuffers(window);
     }
     glfwTerminate();
     return 0;

@@ -6,14 +6,14 @@
 
 class Renderer {
 
-    float left = -2.0f;
-    float right = 2.0f;
-    float bottom = -2.0f;
-    float top = 2.0f;
-    float nearer = -2.0f;
-    float farer = 2.0f;
+        float left = -2.0f;
+        float right = 2.0f;
+        float bottom = -2.0f;
+        float top = 2.0f;
+        float nearer = -2.0f;
+        float farer = 2.0f;
 
-    float scale = 1.0f;
+        float scale = 1.0f;
 
     unsigned int vertices;//TODO add index buffer support
     unsigned int indices;
