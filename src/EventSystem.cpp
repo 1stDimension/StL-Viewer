@@ -24,7 +24,7 @@ void EventSystem::process() {
     glfwPollEvents();
 }
 
-void EventSystem::scrollEvents(GLFWwindow* window, double xoffset, double yoffset){
+void EventSystem::scrollEvents(GLFWwindow *window, double xoffset, double yoffset) {
 
 }
 
@@ -36,6 +36,7 @@ void EventSystem::mouseButtonEvents(GLFWwindow *window, int button, int action, 
 
 void EventSystem::keyEvents(GLFWwindow *window, int key, int scancode, int action, int mods) {
     float sensitivity = 1.0f;
+
     if (action == GLFW_PRESS) {
         switch (key) {
             case GLFW_KEY_LEFT:
@@ -44,11 +45,19 @@ void EventSystem::keyEvents(GLFWwindow *window, int key, int scancode, int actio
                 break;
             case GLFW_KEY_UP:
             case GLFW_KEY_W:
-                renderer->move(0.0f, sensitivity, 0.0f);
+                if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS ||
+                        glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS)
+                    renderer->move(0.0f, 0.0f, sensitivity);
+                else
+                    renderer->move(0.0f, sensitivity, 0.0f);
                 break;
             case GLFW_KEY_DOWN:
             case GLFW_KEY_S:
-                renderer->move(0.0f, -1 *sensitivity, 0.0f);
+                if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS ||
+                    glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS)
+                    renderer->move(0.0f, 0.0f, -1 *sensitivity);
+                else
+                renderer->move(0.0f, -1 * sensitivity, 0.0f);
                 break;
             case GLFW_KEY_RIGHT:
             case GLFW_KEY_D:
@@ -56,7 +65,7 @@ void EventSystem::keyEvents(GLFWwindow *window, int key, int scancode, int actio
                 break;
             case GLFW_KEY_RIGHT_SHIFT:
             case GLFW_KEY_LEFT_SHIFT:
-                    std::cout << "\t" "Shift" << std::endl;
+                std::cout << "\t" "Shift" << std::endl;
                 break;
             default:
                 std::cout << "Key activated" << std::endl;
