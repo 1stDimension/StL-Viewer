@@ -1,4 +1,5 @@
 #include <glad/glad.h>
+#include <GLFW/glfw3.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
@@ -13,6 +14,8 @@ Renderer::Renderer(ContentSplitter* contentSplitter) {
     view = glm::mat4x4(1.0f);
     model = glm::mat4x4(1.0f);
     shaderSetUP();
+
+    glEnable(GL_DEPTH_TEST);
 
 //    glGenVertexArrays(1, &vao);
 //    glBindVertexArray(this->vao);
@@ -31,7 +34,7 @@ Renderer::Renderer(ContentSplitter* contentSplitter) {
 
 
 void Renderer::move(float x, float y, float z) {
-    view = glm::translate(view, glm::vec3(x, y, z));
+    this->view = glm::translate(this->view, glm::vec3(x, y, z));
 }
 
 void Renderer::rotateX(float rotation) {
@@ -75,12 +78,12 @@ void Renderer::rotate(float X, float Y, float Z) {
 
 void Renderer::draw() {
     glm::mat4x4 mvp = this->projection * this->view * this->model;
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     if (u_M_V_P_location != -1)
         glUniformMatrix4fv(u_M_V_P_location, 1, GL_FALSE, glm::value_ptr(mvp));
     if (u_Colour_location != -1)
         glUniform4f(u_Colour_location, 1.0f, 0.0f, 0.0f, 1.0f);
     glDrawArrays( GL_TRIANGLES,0, contentSplitter->getNumVertices() );
-//    contentSplitter->getNumVertices()
 
 }
 

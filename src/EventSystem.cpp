@@ -42,6 +42,14 @@ void EventSystem::keyEvents(GLFWwindow *window, int key, int scancode, int actio
             case GLFW_KEY_A:
                 renderer->move(-1 * sensitivity, 0.0f, 0.0f);
                 break;
+            case GLFW_KEY_UP:
+            case GLFW_KEY_W:
+                renderer->move(0.0f, sensitivity, 0.0f);
+                break;
+            case GLFW_KEY_DOWN:
+            case GLFW_KEY_S:
+                renderer->move(0.0f, -1 *sensitivity, 0.0f);
+                break;
             case GLFW_KEY_RIGHT:
             case GLFW_KEY_D:
                 renderer->move(sensitivity, 0.0f, 0.0f);

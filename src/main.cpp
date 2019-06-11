@@ -42,7 +42,6 @@ int main(int argc, char **argv) {
     EventSystem::setRenderer(renderer);
     auto eventSystem = new EventSystem(window);
     while (!glfwWindowShouldClose(window)) {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         renderer->draw();
         glfwSwapBuffers(window);
