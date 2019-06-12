@@ -36,32 +36,46 @@ void EventSystem::mouseButtonEvents(GLFWwindow *window, int button, int action, 
 
 void EventSystem::keyEvents(GLFWwindow *window, int key, int scancode, int action, int mods) {
     float sensitivity = 1.0f;
+    float rotationSensitivity = 10; //degrees;
 
     if (action == GLFW_PRESS) {
         switch (key) {
             case GLFW_KEY_LEFT:
             case GLFW_KEY_A:
-                renderer->move(-1 * sensitivity, 0.0f, 0.0f);
+                if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS ||
+                    glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS)
+                    renderer->rotateY(-1 * rotationSensitivity);
+                else
+                    renderer->move(-1 * sensitivity, 0.0f, 0.0f);
                 break;
             case GLFW_KEY_UP:
             case GLFW_KEY_W:
                 if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS ||
-                        glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS)
+                    glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS)
                     renderer->move(0.0f, 0.0f, sensitivity);
-                else
+                else if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS ||
+                         glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS)
+                    renderer->rotateX( rotationSensitivity);
                     renderer->move(0.0f, sensitivity, 0.0f);
                 break;
             case GLFW_KEY_DOWN:
             case GLFW_KEY_S:
                 if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS ||
                     glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS)
-                    renderer->move(0.0f, 0.0f, -1 *sensitivity);
+                    renderer->move(0.0f, 0.0f, -1 * sensitivity);
+                else if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS ||
+                         glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS)
+                    renderer->rotateX(-1 * rotationSensitivity);
                 else
-                renderer->move(0.0f, -1 * sensitivity, 0.0f);
+                    renderer->move(0.0f, -1 * sensitivity, 0.0f);
                 break;
             case GLFW_KEY_RIGHT:
             case GLFW_KEY_D:
-                renderer->move(sensitivity, 0.0f, 0.0f);
+                if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS ||
+                    glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS)
+                    renderer->rotateY(rotationSensitivity);
+                else
+                    renderer->move(sensitivity, 0.0f, 0.0f);
                 break;
             case GLFW_KEY_RIGHT_SHIFT:
             case GLFW_KEY_LEFT_SHIFT:

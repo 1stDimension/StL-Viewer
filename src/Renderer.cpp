@@ -1,6 +1,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/rotate_vector.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 #include "Renderer.h"
@@ -38,15 +39,18 @@ void Renderer::move(float x, float y, float z) {
 }
 
 void Renderer::rotateX(float rotation) {
-    model = glm::rotate(model, rotation, glm::vec3(1.0f, 0.0f, 0.0f));
+    this->view = glm::rotate(this->view, glm::radians(rotation)
+            , glm::vec3(1.0f, 0.0f, 0.0f));
 }
 
 void Renderer::rotateY(float rotation) {
-    model = glm::rotate(model, rotation, glm::vec3(0.0f, 1.0f, 0.0f));
+    this->view = glm::rotate(this->view, glm::radians(rotation)
+            , glm::vec3(0.0f, 1.0f, 0.0f));
 }
 
 void Renderer::rotateZ(float rotation) {
-    model = glm::rotate(model, rotation, glm::vec3(0.0f, 0.0f, 1.0f));
+    this->view = glm::rotate(this->view, glm::radians(rotation)
+            , glm::vec3(0.0f, 1.0f, 0.0f));
 }
 
 void Renderer::shaderSetUP() {
@@ -73,7 +77,13 @@ void Renderer::resize(int width, int height) {
 }
 
 void Renderer::rotate(float X, float Y, float Z) {
-
+    //TODO Fix possible overhead
+    this->view = glm::rotate(this->view, glm::radians(X)
+            , glm::vec3(1.0f, 0.0f, 0.0f));
+    this->view = glm::rotate(this->view, glm::radians(Y)
+            , glm::vec3(0.0f, 1.0f, 0.0f));
+    this->view = glm::rotate(this->view, glm::radians(Z)
+            , glm::vec3(0.0f, 0.0f, 1.0f));
 }
 
 void Renderer::draw() {
@@ -87,6 +97,6 @@ void Renderer::draw() {
 
 }
 
-void Renderer::scaleAll(float scale) {
+void Renderer::scaleAll(float factor) {
 
 }

@@ -5,7 +5,7 @@
 #include "ShaderHandler.h"
 
 class Renderer {
-
+private:
         float left = -2.0f;
         float right = 2.0f;
         float bottom = -2.0f;
@@ -41,7 +41,7 @@ public:
     void scaleX(float scaleX);
     void scaleY(float scaleY);
     void scaleZ(float scaleZ);
-    void scaleAll(float scale);
+    void scaleAll(float factor);
     void resize(int width, int height);
     void draw();
 //    void draw(float* data, int NumElements);
