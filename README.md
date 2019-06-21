@@ -1,13 +1,16 @@
 # StL-Viewer
-It is being developed on Windows 10 using MinGW, with goal of being OS and compiler independent. However it was not yet tested on any machine with different OS nor compiled using different compiler.
 
 ## Description
 
 ### Introduction
-This is a student project. I wanted like to learn graphics API like OpenGL. My supervisor tasked me with making a viewer for StL Files.
+This is a student project. I wanted like to learn graphics API like ***OpenGL***. My supervisor tasked me with making a viewer for StL Files.
+
+### Side note
+
+It is being developed on ***Windows 10*** using ***MinGW 8.1.0***, with goal of being OS and compiler independent. However it was not yet tested on any machine with different OS nor compiled using different compiler.
 
 ### AtL files
-According to StL format specification every surface of a 3d object is broken down into a number of triangles. Each triangle is described by 4 3-element vectors. 1st one is the normal vector of this figure, the rest are positions of the vertices. Files come in 2 forms, binary and ASCII.
+According to StL format specification every surface of a 3d object is broken down into a number of triangles. Each triangle is described by 4 3-element vectors. 1st one is the normal vector of this figure, the rest are positions of the vertices. Files come in 2 forms, binary and ASCII. More on that can be found [here][stl].
 
 ### Compilation
 This is project was made using [CMake][cmake], therefore it is essential to install it. What is [CMake][cmake]? From their project website:
@@ -38,6 +41,7 @@ All of listed below are used as gitsubmodules in the libs directory. Because by 
 * [Catch2][Catch2] for tests
 * [Yaml-cpp][yaml] for configuration file 
 
+[stl]: https://www.fabbers.com/tech/STL_Format#Sct_specs
 [cmake]: https://cmake.org/
 [glfw]: https://www.glfw.org/
 [glad]: https://glad.dav1d.de/
