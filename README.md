@@ -25,6 +25,13 @@ Where _folder_ is path to root folder of project. [CMake][cmake] will then gener
 * Graphics card supporting OpenGl 3.3
  
 ## Dependencies:
+
+All of listed below are used as gitsubmodules in the libs directory. Because by default git doesn't download submodules you will need to use 
+
+    git submodule update --init --recursive
+ 
+ If it's your first time checkout a repo. With that said dependencies are as follows:
+ 
 *  [GLFW][glfw] for OS independent windows
 * [Glad][glad] for modern OpenGL
 * [OpenGL Mathematics][glm] for matrix calculationsx`
