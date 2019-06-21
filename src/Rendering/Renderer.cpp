@@ -16,6 +16,7 @@ Renderer::Renderer(ContentSplitter* contentSplitter) {
     this->model = glm::mat4x4(1.0f);
     shaderSetUP();
 
+    glPatchParameteri(GL_PATCH_VERTICES, 6);
     glEnable(GL_DEPTH_TEST);
 
 //    glGenVertexArrays(1, &vao);
@@ -93,7 +94,7 @@ void Renderer::draw() {
         glUniformMatrix4fv(u_M_V_P_location, 1, GL_FALSE, glm::value_ptr(mvp));
     if (u_Colour_location != -1)
         glUniform4f(u_Colour_location, 1.0f, 0.0f, 0.0f, 1.0f);
-    glDrawArrays( GL_LINES,0, contentSplitter->getNumVertices() );
+    glDrawArrays( GL_TRIANGLES,0, contentSplitter->getNumVertices() );
 
 }
 

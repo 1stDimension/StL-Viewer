@@ -6,12 +6,12 @@
 
 class Renderer {
 private:
-        float left = -100.0f;
-        float right = 100.0f;
-        float bottom = -100.0f;
-        float top = 100.0f;
-        float nearer = -100.0f;
-        float farer = 100.0f;
+        float left = -10.0f;
+        float right = 10.0f;
+        float bottom = -10.0f;
+        float top = 10.0f;
+        float nearer = -10.0f;
+        float farer = 10.0f;
 
         float scale = 1.0f;
 
