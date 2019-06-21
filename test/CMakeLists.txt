@@ -4,8 +4,6 @@ project(TESTS_VIEWER)
 set(EXECUTBLE_TEST runTests)
 set(CMAKE_BUILD_PARALLEL_LEVEL 4)
 
-MESSAGE(WARNING ${CMAKE_BUILD_PARALLEL_LEVEL})
-
 include_directories(test_lib)
 include_directories(../src)
 

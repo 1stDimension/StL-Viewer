@@ -35,7 +35,7 @@ void EventSystem::mouseButtonEvents(GLFWwindow *window, int button, int action, 
 }
 
 void EventSystem::keyEvents(GLFWwindow *window, int key, int scancode, int action, int mods) {
-    float sensitivity = 1.0f;
+    float sensitivity = 10.0f;
     float rotationSensitivity = 10; //degrees;
 
     if (action == GLFW_PRESS) {
@@ -55,7 +55,8 @@ void EventSystem::keyEvents(GLFWwindow *window, int key, int scancode, int actio
                     renderer->move(0.0f, 0.0f, sensitivity);
                 else if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS ||
                          glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS)
-                    renderer->rotateX( rotationSensitivity);
+                    renderer->rotateX(rotationSensitivity);
+                else
                     renderer->move(0.0f, sensitivity, 0.0f);
                 break;
             case GLFW_KEY_DOWN:

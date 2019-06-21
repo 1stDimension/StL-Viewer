@@ -1,7 +1,6 @@
 #pragma once
 
 #include "TriangleStl.h"
-#include "Leyout.h"
 #include <vector>
 
 class ContentSplitter {

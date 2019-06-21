@@ -11,9 +11,9 @@
 Renderer::Renderer(ContentSplitter* contentSplitter) {
     //TODO add possibility to change perspective
     this->contentSplitter  = contentSplitter;
-    projection = glm::ortho(left, right, bottom , top , nearer, farer);
-    view = glm::mat4x4(1.0f);
-    model = glm::mat4x4(1.0f);
+    this->projection = glm::ortho(left, right, bottom , top , nearer, farer);
+    this->view = glm::mat4x4(1.0f);
+    this->model = glm::mat4x4(1.0f);
     shaderSetUP();
 
     glEnable(GL_DEPTH_TEST);
