@@ -3,13 +3,13 @@ It is being developed on Windows 10 using MinGW, with goal of being OS and compi
 
 ## Description
 
-#### Introduction
+### Introduction
 This is a student project. I wanted like to learn graphics API like OpenGL. My supervisor tasked me with making a viewer for StL Files.
 
-#### AtL files
+### AtL files
 According to StL format specification every surface of a 3d object is broken down into a number of triangles. Each triangle is described by 4 3-element vectors. 1st one is the normal vector of this figure, the rest are positions of the vertices. Files come in 2 forms, binary and ASCII.
 
-## Compilation
+### Compilation
 This is project was made using [CMake][cmake], therefore it is essential to install it. What is [CMake][cmake]? From their project website:
  > CMake is an open-source, cross-platform family of tools designed to build, test and package software.
  
