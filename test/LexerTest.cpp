@@ -1,4 +1,4 @@
-#include <Lexer.h>
+#include <Parser/Lexer.h>
 #include "Catch/catch.hpp"
 #include <cstring>
 //LEXER

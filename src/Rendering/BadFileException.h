@@ -1,6 +1,4 @@
 #pragma once
-
-
 #include <exception>
 
 class BadFileException : public std::exception {

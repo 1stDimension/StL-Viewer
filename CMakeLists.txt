@@ -14,7 +14,7 @@ set(EXECUTABLR_TESTS Test${PROJECT_NAME})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${${PROJECT_NAME}_SOURCE_DIR}/bin)
 #set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY /lib)
-include_directories(src)
+
 
 include_directories(${LIBS_DIR}/glfw/include)
 include_directories( ${LIBS_DIR}/glad/include)

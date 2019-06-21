@@ -1,5 +1,5 @@
 #include "Catch/catch.hpp"
-#include "TriangleStl.h"
+#include "Parser/TriangleStl.h"
 
 
 float dir[3] = {0.0f, 0.0f, 0.0f};

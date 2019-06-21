@@ -25,7 +25,7 @@ Where _folder_ is path to root folder of project. [CMake][cmake] will then gener
 ## Requirements
 * CMake 3.13 or newer
 * C++ compiler supporting C++17
-* Graphics card supporting OpenGl 3.3
+* Graphics card supporting OpenGL 3.3
  
 ## Dependencies:
 
@@ -37,7 +37,7 @@ All of listed below are used as gitsubmodules in the libs directory. Because by 
  
 * [GLFW][glfw] for OS independent windows
 * [Glad][glad] for modern OpenGL
-* [OpenGL Mathematics][glm] for matrix calculationsx`
+* [OpenGL Mathematics][glm] for matrix calculations`
 * [Catch2][Catch2] for tests
 * [Yaml-cpp][yaml] for configuration file 
 

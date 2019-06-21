@@ -6,7 +6,7 @@
 #include "EventSystem.h"
 #include "Renderer.h"
 #include "ContentSplitter.h"
-#include "Configuration.h"
+#include "../Config/Configuration.h"
 
 //TODO Check if file is an stl file If it's nor throw an exception
 int main(int argc, char **argv) {

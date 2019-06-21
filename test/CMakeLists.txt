@@ -19,7 +19,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ./test_bin)
 set(EXECUTABLE_OUTPUT_PATH ./test_bin)
 
 aux_source_directory(../src SOURCE)
-list(REMOVE_ITEM SOURCE "../src/main.cpp")
+list(REMOVE_ITEM SOURCE "../src/main/main.cpp")
 #list(REMOVE_ITEM SOURCE "../src/ShaderHandler.cpp")#TODO figure out why it doesn't work
 #TODO somehow add glad to libs included in tests
 #TODO consider creating a lib from files in src

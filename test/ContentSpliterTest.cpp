@@ -1,6 +1,6 @@
 #include <Catch/catch.hpp>
-#include <ParserStl.h>
-#include "ContentSplitter.h"
+#include <Parser/ParserStl.h>
+#include "Rendering/ContentSplitter.h"
 
 TEST_CASE("Check if data is converted correctly", "[ContentSplitter]"){
     // Code from project START
