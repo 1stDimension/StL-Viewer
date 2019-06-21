@@ -1,5 +1,5 @@
 # StL-Viewer
-It is being developed on Windows 10 using MinGW, with goal of being OS and compiler independant. However it was not yet tested on any machine with different OS nor compiled using different compiler.
+It is being developed on Windows 10 using MinGW, with goal of being OS and compiler independent. However it was not yet tested on any machine with different OS nor compiled using different compiler.
 
 ## Description
 
@@ -32,7 +32,7 @@ All of listed below are used as gitsubmodules in the libs directory. Because by 
  
  If it's your first time checkout a repo. With that said dependencies are as follows:
  
-*  [GLFW][glfw] for OS independent windows
+* [GLFW][glfw] for OS independent windows
 * [Glad][glad] for modern OpenGL
 * [OpenGL Mathematics][glm] for matrix calculationsx`
 * [Catch2][Catch2] for tests
