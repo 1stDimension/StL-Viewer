@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.13)
 project(STL-viewer)
 
-
 if (APPLE)
     add_definitions(-DGTEST_USE_OWN_TR1_TUPLE)
     add_definitions(-D__GLIBCXX__)

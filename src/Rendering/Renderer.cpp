@@ -110,7 +110,7 @@ void Renderer::draw() {
     if (u_Colour_location != -1)
         glUniform4f(u_Colour_location, 1, 0.2, 0.7, 1.0f);
 
-    glDrawArrays( GL_LINES,0, contentSplitter->getNumVertices() );
+    glDrawArrays( GL_TRIANGLES,0, contentSplitter->getNumVertices() );
 
 }
 
