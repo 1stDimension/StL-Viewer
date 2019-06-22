@@ -19,6 +19,8 @@ public:
 
     uint32_t getNumNormals() const;
 
+    ~ContentSplitter();
+
 };
 
 

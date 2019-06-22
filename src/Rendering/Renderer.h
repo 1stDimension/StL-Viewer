@@ -47,7 +47,6 @@ public:
     void scaleAll(float factor);
     void resize(int width, int height);
     void draw();
-//    void draw(float* data, int NumElements);
 };
 
 

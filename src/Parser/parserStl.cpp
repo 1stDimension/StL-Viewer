@@ -1,4 +1,5 @@
 #include <fstream>
+#include "Lexer.h"
 #include "ParserStl.h"
 #include <cstdint>
 #include <cstring>
@@ -11,13 +12,12 @@
 
 
 std::vector<TriangleStl *> *ParserStl::parseFile() {
-    lexer = new Lexer(input);
-    char *identifier = lexer->getNextString();
+    char *identifier = lexer.getNextString();
     auto reference = "solid";
     if (strcmp(reference, identifier) == 0)
         return parseAscii();
     else {
-        lexer->binaryMode();
+        lexer.binaryMode();
         return parseBin(); //skip the 80 bytes long header
     }
 }
@@ -29,26 +29,26 @@ std::vector<TriangleStl *> *ParserStl::parseAscii() {
     auto output = new std::vector<TriangleStl *>();
     output->reserve(20);
     char *token;
-    token = lexer->getNextString(); // we got name
+    token = lexer.getNextString(); // we got name
     delete [] token;
     float* direction;
-    float** vertices = new float*[3];
+    auto vertices = new float*[3];
     while (token != nullptr) {
-        token = lexer->getNextString();
+        token = lexer.getNextString();
         if (strcmp(token, "facet") == 0) {
             delete[] token;
-            token = lexer->getNextString();
+            token = lexer.getNextString();
             if (strcmp(token, "normal") == 0) {
                 delete[] token;
                 direction = parseCordinates();
                 //TODO error checking if coordinates vere not parsed correctly
-                token = lexer->getNextString();
+                token = lexer.getNextString();
                 if (strcmp(token, "outer") == 0) {
                     delete[] token;
-                    token = lexer->getNextString();
+                    token = lexer.getNextString();
                     if (strcmp(token, "loop") == 0) {
                         delete[] token;
-                        token = lexer->getNextString();
+                        token = lexer.getNextString();
                         for (uint8_t i = 0; i < 3; i++) {
                             if (strcmp(token, "vertex") == 0) {
                                 vertices[i] = parseCordinates();//TODO add errorchecking
@@ -62,11 +62,11 @@ std::vector<TriangleStl *> *ParserStl::parseAscii() {
                                 //THIS COULD WORK IF I WOULD REPLACE RAW POINTERS WITH SMART ONES
                             }
                             delete [] token;
-                            token = lexer->getNextString();
+                            token = lexer.getNextString();
                         }
                         if( strcmp(token, "endloop") == 0) {
                             delete [] token;
-                            token = lexer->getNextString();
+                            token = lexer.getNextString();
                             if (strcmp(token, "endfacet") == 0){
                                 output->push_back(new TriangleStl(direction, vertices[0], vertices[1], vertices[2]));
                             }
@@ -100,7 +100,6 @@ std::vector<TriangleStl *> *ParserStl::parseAscii() {
     }
 //    TODO check if file end with endsolid
 ending:
-    cleanUp();
     if(output->empty()) {
         delete output;
         return nullptr;
@@ -110,24 +109,24 @@ ending:
 
 float *ParserStl::parseCordinates() {
     char * token;
-    float* verteces = new float[3];
+    auto vertices = new float[3];
     for (uint8_t j = 0; j < 3; j++) {
-        token = lexer->getNextString();
+        token = lexer.getNextString();
         char *end;
-        verteces[j] = strtof(token, &end);
+        vertices[j] = strtof(token, &end);
         if (end != (token + strlen(token))) {
             std::cout << "Error" << token << "Could not be converted to numer"
                       << std::endl;// rise an error
-                      delete[] verteces;
+                      delete[] vertices;
             return nullptr;
         }
         delete token;
     }
-    return verteces;
+    return vertices;
 }
 
 std::vector<TriangleStl *> *ParserStl::parseBin() {
-    uint32_t NumberFaces = lexer->getNext32int();
+    uint32_t NumberFaces = lexer.getNext32int();
     auto output = new std::vector<TriangleStl *>(NumberFaces);
 
     for (uint64_t i = 0; i < NumberFaces; i++) {
@@ -137,37 +136,31 @@ std::vector<TriangleStl *> *ParserStl::parseBin() {
         auto vertexTree = new float[3];
 
 
-        direction[0] = lexer->getNextFloat();
-        direction[1] = lexer->getNextFloat();
-        direction[2] = lexer->getNextFloat();
+        direction[0] = lexer.getNextFloat();
+        direction[1] = lexer.getNextFloat();
+        direction[2] = lexer.getNextFloat();
 
-        vertexOne[0] = lexer->getNextFloat();
-        vertexOne[1] = lexer->getNextFloat();
-        vertexOne[2] = lexer->getNextFloat();
+        vertexOne[0] = lexer.getNextFloat();
+        vertexOne[1] = lexer.getNextFloat();
+        vertexOne[2] = lexer.getNextFloat();
 
-        vertexTwo[0] = lexer->getNextFloat();
-        vertexTwo[1] = lexer->getNextFloat();
-        vertexTwo[2] = lexer->getNextFloat();
+        vertexTwo[0] = lexer.getNextFloat();
+        vertexTwo[1] = lexer.getNextFloat();
+        vertexTwo[2] = lexer.getNextFloat();
 
-        vertexTree[0] = lexer->getNextFloat();
-        vertexTree[1] = lexer->getNextFloat();
-        vertexTree[2] = lexer->getNextFloat();
+        vertexTree[0] = lexer.getNextFloat();
+        vertexTree[1] = lexer.getNextFloat();
+        vertexTree[2] = lexer.getNextFloat();
 
-        lexer->getNext16int();
+        lexer.getNext16int();
 
         auto triangleStl = new TriangleStl(direction, vertexOne, vertexTwo, vertexTree);
         output->push_back(triangleStl);
     }
 //TODO Think what to do when there where incorrectly loaded fies
-    cleanUp();
     return output;
 }
 
-ParserStl::ParserStl(std::ifstream *input) {
-    this->input = input;
-    lexer = nullptr;
-}
+ParserStl::ParserStl(std::ifstream *input) : lexer(input), input(input) {}
 
-void ParserStl::cleanUp() {
-    delete lexer;
-}
+ParserStl::~ParserStl() = default;

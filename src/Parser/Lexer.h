@@ -9,7 +9,7 @@ class Lexer {
     //TODO make buffer only allocated on the heap
 //    TODO Let change of ifstream after parseing
 public:
-    Lexer(std::ifstream* input);
+    explicit Lexer(std::ifstream* input);
     uint16_t getNext16int();
     uint32_t getNext32int();
     char* getNextString(); //Asks Lexer for next string of non white space characters. Should be used only in tekst mode

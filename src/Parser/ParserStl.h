@@ -6,10 +6,8 @@
 #include "Lexer.h"
 
 class ParserStl {
-    std::ifstream* input;
-    Lexer* lexer;
-
-    void cleanUp();
+    std::ifstream* input;//external reference
+    Lexer lexer;
 
     float* parseCordinates();
 
@@ -19,6 +17,7 @@ class ParserStl {
 
 public:
     ParserStl(std::ifstream* input);
+    ~ParserStl();
 
     std::vector<TriangleStl *> * parseFile();
 

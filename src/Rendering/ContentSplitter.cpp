@@ -41,3 +41,8 @@ float *ContentSplitter::getNormals() const {
 uint32_t ContentSplitter::getNumNormals() const {
     return NumNormals;
 }
+
+ContentSplitter::~ContentSplitter() {
+    delete [] vertices;
+    delete [] normals;
+}

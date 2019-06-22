@@ -18,10 +18,15 @@ int main(int argc, char **argv) {
     auto dataInput = new std::ifstream(argv[1], std::ifstream::in | std::ifstream::binary);
     auto parser = new ParserStl(dataInput);
     auto triangles = parser->parseFile();
+
+    delete parser;
+    delete dataInput;
+
     if(triangles == nullptr) {
         std::cout << "Wrong File" << std::endl;
         return 2;
     }
+
     auto contentSplitter = new ContentSplitter(triangles);
     GLFWwindow *window;
 
@@ -53,6 +58,10 @@ int main(int argc, char **argv) {
         eventSystem->process();
 
     }
+
+
     glfwTerminate();
+    delete renderer;
+    delete contentSplitter;
     return 0;
 }

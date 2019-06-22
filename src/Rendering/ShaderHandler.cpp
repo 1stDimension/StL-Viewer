@@ -42,4 +42,5 @@ int32_t ShaderHandler::getUniformLocation(const char *name) {
     return glGetUniformLocation(this->id, name);
 }
 
+//TODO actual cleanUP of OpenGL
 ShaderHandler::~ShaderHandler() = default;
