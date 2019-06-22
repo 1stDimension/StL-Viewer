@@ -15,16 +15,19 @@ private:
 
         float scale = 1.0f;
 
-    unsigned int vertices{};//TODO add index buffer support
-    unsigned int indices{};
-    unsigned int vao{};
+    unsigned int vertices;//TODO add index buffer support
+    unsigned int normals;
+    unsigned int indices;
+    unsigned int vao;
     ContentSplitter* contentSplitter;
 
-    glm::mat4x4 projection{};
-    glm::mat4x4 view{};
-    glm::mat4x4 model{};
+    glm::mat4x4 projection;
+    glm::mat4x4 view;
+    glm::mat4x4 model;
 
-    int32_t u_M_V_P_location;
+    int32_t u_M_location;
+    int32_t u_V_location;
+    int32_t u_P_location;
     int32_t u_Colour_location;
 
     ShaderHandler shaderHandler;
