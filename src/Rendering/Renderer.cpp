@@ -108,7 +108,7 @@ void Renderer::draw() {
     if (u_P_location != -1)
         glUniformMatrix4fv(u_P_location, 1, GL_FALSE, glm::value_ptr(this->projection));
     if (u_Colour_location != -1)
-        glUniform4f(u_Colour_location, 1, 0.2, 0.7, 1.0f);
+        glUniform4f(u_Colour_location, 1, 0.0, 0.0, 1.0f);
 
     glDrawArrays( GL_TRIANGLES,0, contentSplitter->getNumVertices() );
 

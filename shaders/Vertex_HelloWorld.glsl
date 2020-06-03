@@ -1,4 +1,4 @@
-#version 430 core
+#version 330 core
 
 uniform mat4  u_M;
 uniform mat4  u_V;
@@ -14,16 +14,16 @@ out vert_out{
 
 //lightning
 //TODO consider passing it as uniform
-uniform vec3  light_pos = vec3(100.0, 100.0, 100.0);
-uniform vec3  specular_albedo = vec3(0.7);//0.7
-uniform float specular_power = 128.0;//128.0
-uniform vec3  ambient = vec3(0.1, 0.1, 0.1);//0.1, 0.1, 0.1
+uniform vec3  light_position = vec3(100.0, 100.0, 100.0);
+uniform vec3  specular_albedo = vec3(0.7);
+uniform float specular_power = 128.0;
+uniform vec3  ambient = vec3(0.1, 0.1, 0.1);
 
 
 void main() {
     vec4 P = u_M * u_V * position;
     vec3 N = mat3(u_M * u_V) * normal;
-    vec3 L = light_pos - P.xyz;
+    vec3 L = light_position - P.xyz;
     vec3 V = -P.xyz;
 
     N = normalize(N);
