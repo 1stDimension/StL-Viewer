@@ -9,7 +9,7 @@ This is a student project. I wanted like to learn graphics API like ***OpenGL***
 
 It is being developed on ***Windows 10*** using ***MinGW 8.1.0***, with goal of being OS and compiler independent. However it was not yet tested on any machine with different OS nor compiled using different compiler.
 
-### AtL files
+### StL files
 According to StL format specification every surface of a 3d object is broken down into a number of triangles. Each triangle is described by 4 3-element vectors. 1st one is the normal vector of this figure, the rest are positions of the vertices. Files come in 2 forms, binary and ASCII. More on that can be found [here][stl].
 
 ### Compilation
