@@ -1,3 +1,6 @@
 bin
 .idea
 .vs
+
+cmake-build-debug
+cmake-build-wsl_profile
